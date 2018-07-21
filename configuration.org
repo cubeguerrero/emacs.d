@@ -1,0 +1,497 @@
+#+STARTUP: overview
+
+* My Emacs Configuration
+** General
+Basic configuration to make Emacs default behavior better.
+
+#+BEGIN_SRC emacs-lisp
+(setq initial-scratch-message "Welcome in Emacs"
+      inhibit-startup-screen t
+      ring-bell-function 'ignore)
+
+(setq-default major-mode #'text-mode)
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups"))                  ; which directory to put backups file
+      auto-save-file-name-transforms '((".*" "~/.emacs.d//auto-save-list/" t)) ; transform backups file name
+      coding-system-for-read 'utf-8	; use utf-8 by default
+      coding-system-for-write 'utf-8    ; Use utf-8 by default
+      delete-old-versions -1            ; delete excess backup versions silently
+      version-control t                 ; use version control
+      vc-make-backup-files t            ; make backups file even when in version controlled dir
+      vc-follow-symlinks t		; don't ask for confirmation when opening symlinked file
+      default-fill-column 80            ; toggle wrapping text at the 80th character
+      sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
+
+;; delete the selection with a keypress
+(delete-selection-mode t)
+
+;; Hide menu-bar, tool-bar, and scroll-bar
+(when window-system
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
+
+;; Initialize show-paren-mode
+(show-paren-mode 1)
+(setq-default show-paren-delay 0)
+
+;; Always use spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
+;; Remove whitespace on save
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+;; Electric pair mode
+(electric-pair-mode 1)
+
+;; Autoreload files open on buffer
+(global-auto-revert-mode t)
+#+END_SRC
+
+*** OS Specific (Mac)
+Change META key to COMMAND key.
+#+BEGIN_SRC emacs-lisp
+(when (eq system-type 'darwin)
+  (require 'ls-lisp)
+  (setq-default ls-lisp-use-insert-directory-program nil)
+  (setq-default mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'none))
+#+END_SRC
+
+** Packages
+*** Base
+**** use-package
+#+BEGIN_SRC emacs-lisp
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
+#+END_SRC
+
+**** diminish
+#+BEGIN_SRC emacs-lisp
+(use-package diminish
+  :ensure t)
+
+(diminish 'auto-revert-mode)
+(diminish 'visual-line-mode)
+#+END_SRC
+
+**** which-key
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :ensure t
+  :diminish (which-key-mode)
+  :config
+  (which-key-mode))
+#+END_SRC
+
+*** File
+**** ivy
+#+BEGIN_SRC emacs-lisp
+(use-package ivy
+  :ensure t
+  :diminish (ivy-mode)
+  :bind ("C-x b" . ivy-switch-buffer))
+#+END_SRC
+
+**** counsel
+#+BEGIN_SRC emacs-lisp
+(use-package counsel
+  :ensure t
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-c g" . counsel-git)
+         ("C-c G" . counsel-git-grep)))
+#+END_SRC
+
+**** swiper
+#+BEGIN_SRC emacs-lisp
+(use-package swiper
+  :ensure t
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)
+         ("C-c C-r" . ivy-resume))
+  :config
+  (progn
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t
+          ivy-display-style 'fancy)
+    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+#+END_SRC
+
+**** projectile
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :ensure t
+  :diminish (projectile-mode)
+  :bind ("s-p" . projectile-commander)
+  :config
+  (add-to-list 'projectile-globally-ignored-directories "*node_modules")
+  (projectile-mode +1)
+  (setq projectile-mode-line
+        '(:eval (format " [%s]" (projectile-project-name))))
+  (setq projectile-remember-window-configs t
+        projectile-completion-system 'ivy))
+#+END_SRC
+
+**** counsel-projectile
+#+BEGIN_SRC emacs-lisp
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (counsel-projectile-mode))
+#+END_SRC
+
+*** Term
+**** exec-path-from-shell
+#+BEGIN_SRC emacs-lisp
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
+#+END_SRC
+
+**** multi-term
+#+BEGIN_SRC emacs-lisp
+;; Open multi-term consider projectile root
+(defun cube/multi-term ()
+  "Opens up a new terminal in the directory associated with the current buffer's file."
+  (interactive)
+  (if (projectile-project-p)
+      (projectile-with-default-dir (projectile-project-root) (multi-term))
+    (multi-term)))
+
+;; Vertical split multi-term
+(defun cube/multi-term-vertical ()
+  "Opens up a new terminal in the directory associated with the current buffer's file."
+  (interactive)
+  (split-window-right)
+  (other-window 1)
+  (if (projectile-project-p)
+      (projectile-with-default-dir (projectile-project-root) (multi-term))
+    (multi-term)))
+
+;; Horizontal split multi-term
+(defun cube/multi-term-horizontal ()
+  "Opens up a new terminal in the directory associated with the current buffer's file."
+  (interactive)
+  (split-window-below)
+  (other-window 1)
+  (if (projectile-project-p)
+      (projectile-with-default-dir (projectile-project-root) (multi-term))
+    (multi-term)))
+
+(use-package multi-term
+  :ensure t
+  :commands (multi-term)
+  :bind (("C-c t v" . cube/multi-term-vertical)
+         ("C-c t h" . cube/multi-term-horizontal)
+         ("C-c t t" . cube/multi-term))
+  :config
+  (setq multi-term-program "/usr/local/bin/fish"))
+#+END_SRC
+*** User Interface
+**** Base
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default t :font "Fira Code 14")
+(set-face-font 'default "Fira Code-14")
+
+;; Setup ligatures for Fira Code
+(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+               (36 . ".\\(?:>\\)")
+               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               ;;(42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (48 . ".\\(?:x[a-zA-Z]\\)")
+               (58 . ".\\(?:::\\|[:=]\\)")
+               (59 . ".\\(?:;;\\|;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+               (91 . ".\\(?:]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (119 . ".\\(?:ww\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+               )
+             ))
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+    `([,(cdr char-regexp) 0 font-shape-gstring]))))
+
+(display-line-numbers-mode t)
+
+(load-theme 'leuven t)
+(set-face-attribute 'fringe nil
+                    :foreground (face-foreground 'default)
+                    :background (face-background 'default))
+#+END_SRC
+
+**** smart-mode-line
+#+BEGIN_SRC emacs-lisp
+(use-package smart-mode-line
+  :ensure t
+  :config
+  (setq sml/shorten-directory t)
+  (setq sml/shorten-modes t)
+  (setq sml/name-width 40)
+  (setq sml/mode-width 'full)
+  (setq sml/theme 'light)
+  (if after-init-time
+          (sml/setup)
+          (add-hook 'after-init-hook 'sml/setup)))
+#+END_SRC
+
+**** column-enforce-mode
+#+BEGIN_SRC emacs-lisp
+(use-package column-enforce-mode
+  :ensure t
+  :diminish (column-enforce-mode)
+  :config
+  (setq column-enforce-column 80)
+  (global-column-enforce-mode t))
+#+END_SRC
+*** Git Integration
+**** magit
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :ensure t
+  :commands (magit-status projectile-vc)
+  :bind ("C-x g" . magit-status)
+  :config
+  (add-to-list 'magit-log-arguments "--no-abbrev-commit")
+  (setq magit-popup-use-prefix-argument 'default
+        magit-completing-read-function 'ivy-completing-read))
+#+END_SRC
+*** Note Taking
+**** org-mode
+#+BEGIN_SRC emacs-lisp
+(use-package org
+  :ensure t
+  :mode ("\\.org$" . org-mode)
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c c" . org-capture)
+         ("C-c b" . org-iswitchb))
+  :config
+  (progn
+    ;; Hide leading stars
+    (setq org-hide-leading-stars t)
+
+    ;; Set org director
+    (setq org-directory "~/Dropbox/Org")
+
+    ;; Fontify code in code blocks
+    (setq org-src-fontify-natively t)
+
+    ;; Inline images
+    (setq org-startup-with-inline-images t)
+
+    ;; Set file to save todo items
+    (setq org-agenda-files '("~/Dropbox/Org/Todo/inbox.org"
+                             "~/Dropbox/Org/Todo/projects.org"))
+
+    ;; Set how to keep track of finished TODO
+    (setq org-log-done 'time)
+
+    ;; Set org-mode todo keywords
+    (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+
+    ;; Set org-capture templates
+    (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                               (file+headline "~/Dropbox/Org/Todo/inbox.org" "Tasks")
+                               "* TODO %i%?")))))
+
+(use-package org-download
+  :ensure t)
+#+END_SRC
+
+**** markdown-mode
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+#+END_SRC
+*** Programming
+**** flycheck
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :diminish (flycheck-mode)
+  :config
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+#+END_SRC
+
+**** company-mode
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :diminish (company-mode)
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+#+END_SRC
+
+**** ruby
+***** enhanced-ruby-mode
+#+BEGIN_SRC emacs-lisp
+(use-package enh-ruby-mode
+  :ensure t
+  :diminish (enh-ruby-mode)
+  :mode (("\\.rb\\'"       . enh-ruby-mode)
+         ("\\.ru\\'"       . enh-ruby-mode)
+         ("\\.jbuilder\\'" . enh-ruby-mode)
+         ("\\.gemspec\\'"  . enh-ruby-mode)
+         ("\\.rake\\'"     . enh-ruby-mode)
+         ("Rakefile\\'"    . enh-ruby-mode)
+         ("Gemfile\\'"     . enh-ruby-mode)
+         ("Guardfile\\'"   . enh-ruby-mode)
+         ("Capfile\\'"     . enh-ruby-mode)
+         ("Vagrantfile\\'" . enh-ruby-mode))
+  :config
+  (progn
+    (setq enh-ruby-indent-level 2
+          enh-ruby-deep-indent-paren nil
+          enh-ruby-bounce-deep-indent t
+          enh-ruby-hanging-indent-level 2)
+    (setq ruby-insert-encoding-magic-comment nil)))
+#+END_SRC
+
+***** robe-mode
+#+BEGIN_SRC emacs-lisp
+(use-package robe
+  :ensure
+  :diminish (robe-mode)
+  :config
+  (add-hook 'enh-ruby-mode-hook 'robe-mode)
+  (eval-after-load 'company '(push 'company-robe company-backends)))
+#+END_SRC
+
+***** rubocop
+#+BEGIN_SRC emacs-lisp
+(use-package rubocop
+  :ensure t
+  :diminish (rubocop-mode)
+  :config
+  (add-hook 'enh-ruby-mode-hook 'rubocop-mode))
+#+END_SRC
+
+**** javascript
+***** js2-mode
+#+BEGIN_SRC emacs-lisp
+(use-package js2-mode
+  :ensure t
+  :mode ("\\.js\\'" . js2-mode)
+  :commands js2-mode
+  :config
+  (setq-default js2-basic-offset 2
+                js2-mode-show-parse-errors nil
+                js2-mode-show-strict-warnings nil))
+#+END_SRC
+
+***** json-mode
+#+BEGIN_SRC emacs-lisp
+(use-package json-mode
+  :ensure t
+  :mode "\\.json$"
+  :config
+  (setq json-reformat:indent-width 2
+        js-indent-level 2))
+#+END_SRC
+
+***** pug-mode
+#+BEGIN_SRC emacs-lisp
+(use-package pug-mode
+  :ensure t
+  :mode (("\\.jade\\'" . pug-mode)
+         ("\\.pug\\'" . pug-mode))
+  :config
+  (setq pug-tab-width 2))
+#+END_SRC
+
+***** company-tern
+#+BEGIN_SRC emacs-lisp
+(use-package company-tern
+  :ensure t
+  :diminish (tern-mode)
+  :config
+  (add-hook 'js2-mode-hook 'tern-mode)
+  (eval-after-load 'company '(push 'company-tern company-backends)))
+#+END_SRC
+
+**** elixir
+***** elixir-mode
+#+BEGIN_SRC emacs-lisp
+(use-package elixir-mode
+  :ensure t)
+#+END_SRC
+
+***** alchemist
+#+BEGIN_SRC emacs-lisp
+(use-package alchemist
+  :ensure t)
+#+END_SRC
+
+**** haskell
+***** haskell-mode
+#+BEGIN_SRC emacs-lisp
+(use-package haskell-mode
+  :ensure t
+  :mode (("\\.hs\\'" . haskell-mode)
+         ("\\.lhs\\'" . haskell-mode)
+         ("\\.hsc\\'" . haskell-mode)
+         ("\\.cpphs\\'" . haskell-mode)
+         ("\\.c2hs\\'" . haskell-mode)))
+#+END_SRC
+
+**** python
+***** pipenv-mode
+#+BEGIN_SRC emacs-lisp
+(use-package pipenv
+  :ensure t
+  :diminish (pipenv-mode)
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq pipenv-projectile-after-switch-function #'pipenv-projectile-after-switch-extended))
+#+END_SRC
+
+**** web technologies
+***** web-mode
+#+BEGIN_SRC emacs-lisp
+(use-package web-mode
+  :ensure t
+  :mode (("\\.erb\\'" . web-mode)
+         ("\\.html?\\'" . web-mode)
+         ("\\.djhtml\\'" . web-mode)
+         ("\\.eex\\'" . web-mode)
+         ("\\.jsx\\'" . web-mode)
+         ("\\.vue\\'" . web-mode))
+  :config
+  (add-to-list 'web-mode-engine-file-regexps '("django" . "\\.html"))
+  (progn
+    (setq web-mode-markup-indent-offset 2
+          web-mode-css-indent-offset 2
+          web-mode-code-indent-offset 2
+          web-mode-engines-alist '(("django" . "\\.html\\'")))))
+#+END_SRC
