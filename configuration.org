@@ -380,6 +380,16 @@ Change META key to COMMAND key.
   (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
 
+**** smartparens
+#+BEGIN_SRC emacs-lisp
+(use-package smartparens
+  :ensure t
+  :diminish (smartparens-mode)
+  :config
+  (require 'smartparens-config)
+  (add-hook 'prog-mode-hook #'smartparens-mode))
+#+END_SRC
+
 **** ruby
 ***** enhanced-ruby-mode
 #+BEGIN_SRC emacs-lisp
