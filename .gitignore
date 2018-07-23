@@ -51,5 +51,8 @@ projectile-bookmarks.eld
 # recentf
 recentf
 
+configuration.el
+
+projectile.cache
 
 # End of https://www.gitignore.io/api/emacs
