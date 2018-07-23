@@ -82,6 +82,8 @@ Change META key to COMMAND key.
 
 (diminish 'auto-revert-mode)
 (diminish 'visual-line-mode)
+(diminish 'eldoc-mode)
+(diminish 'abbrev-mode)
 #+END_SRC
 
 **** which-key
@@ -193,9 +195,9 @@ Change META key to COMMAND key.
 (use-package multi-term
   :ensure t
   :commands (multi-term)
-  :bind (("C-c t v" . cube/multi-term-vertical)
-         ("C-c t h" . cube/multi-term-horizontal)
-         ("C-c t t" . cube/multi-term))
+  :bind (("C-c C-t v" . cube/multi-term-vertical)
+         ("C-c C-t h" . cube/multi-term-horizontal)
+         ("C-c C-t t" . cube/multi-term))
   :config
   (setq multi-term-program "/usr/local/bin/fish"))
 #+END_SRC
@@ -236,12 +238,22 @@ Change META key to COMMAND key.
     (set-char-table-range composition-function-table (car char-regexp)
     `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
-(display-line-numbers-mode t)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode t)
+#+END_SRC
 
-(load-theme 'leuven t)
-(set-face-attribute 'fringe nil
+**** doom-themes
+#+BEGIN_SRC emacs-lisp
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-one-light t)
+  (doom-themes-visual-bell-config)
+  (doom-themes-org-config)
+  (set-face-attribute 'fringe nil
                     :foreground (face-foreground 'default)
-                    :background (face-background 'default))
+                    :background (face-background 'default)))
 #+END_SRC
 
 **** smart-mode-line
@@ -253,7 +265,7 @@ Change META key to COMMAND key.
   (setq sml/shorten-modes t)
   (setq sml/name-width 40)
   (setq sml/mode-width 'full)
-  (setq sml/theme 'light)
+  (setq sml/theme 'respectful)
   (if after-init-time
           (sml/setup)
           (add-hook 'after-init-hook 'sml/setup)))
@@ -268,6 +280,21 @@ Change META key to COMMAND key.
   (setq column-enforce-column 80)
   (global-column-enforce-mode t))
 #+END_SRC
+
+**** ace-window
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :ensure t
+  :bind ("C-c C-w w" . ace-window))
+#+END_SRC
+
+**** avy
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :ensure t
+  :bind ("C-c C-w a" . avy-goto-char-2))
+#+END_SRC
+
 *** Git Integration
 **** magit
 #+BEGIN_SRC emacs-lisp
