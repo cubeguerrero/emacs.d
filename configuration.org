@@ -44,11 +44,11 @@ Basic configuration to make Emacs default behavior better.
 ;; Remove whitespace on save
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
-;; Electric pair mode
-(electric-pair-mode 1)
-
 ;; Autoreload files open on buffer
 (global-auto-revert-mode t)
+
+;; Toggle fullscreen
+(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 #+END_SRC
 
 *** OS Specific (Mac)
