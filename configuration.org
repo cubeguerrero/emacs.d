@@ -101,7 +101,9 @@ Change META key to COMMAND key.
 (use-package ivy
   :ensure t
   :diminish (ivy-mode)
-  :bind ("C-x b" . ivy-switch-buffer))
+  :config
+  (setq ivy-use-virtual-buffers t
+            ivy-count-format "%d/%d "))
 #+END_SRC
 
 **** counsel
@@ -133,14 +135,13 @@ Change META key to COMMAND key.
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
   :ensure t
-  :diminish (projectile-mode)
-  :bind ("s-p" . projectile-commander)
   :config
   (add-to-list 'projectile-globally-ignored-directories "*node_modules")
   (projectile-mode +1)
   (setq projectile-mode-line
         '(:eval (format " [%s]" (projectile-project-name))))
   (setq projectile-remember-window-configs t
+        projectile-keymap-prefix (kbd "C-c p")
         projectile-completion-system 'ivy))
 #+END_SRC
 
@@ -195,9 +196,9 @@ Change META key to COMMAND key.
 (use-package multi-term
   :ensure t
   :commands (multi-term)
-  :bind (("C-c C-t v" . cube/multi-term-vertical)
-         ("C-c C-t h" . cube/multi-term-horizontal)
-         ("C-c C-t t" . cube/multi-term))
+  :bind (("C-c t v" . cube/multi-term-vertical)
+         ("C-c t h" . cube/multi-term-horizontal)
+         ("C-c t t" . cube/multi-term))
   :config
   (setq multi-term-program "/usr/local/bin/fish"))
 #+END_SRC
@@ -425,14 +426,6 @@ Change META key to COMMAND key.
   (eval-after-load 'company '(push 'company-robe company-backends)))
 #+END_SRC
 
-***** rubocop
-#+BEGIN_SRC emacs-lisp
-(use-package rubocop
-  :ensure t
-  :diminish (rubocop-mode)
-  :config
-  (add-hook 'enh-ruby-mode-hook 'rubocop-mode))
-#+END_SRC
 
 **** javascript
 ***** js2-mode
