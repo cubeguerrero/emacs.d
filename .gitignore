@@ -55,4 +55,6 @@ configuration.el
 
 projectile.cache
 
+bookmarks
+
 # End of https://www.gitignore.io/api/emacs

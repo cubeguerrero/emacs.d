@@ -301,6 +301,13 @@ Change META key to COMMAND key.
     ;; Inline images
     (setq org-startup-with-inline-images t)
 
+    ;; Set default notes file
+    (setq org-default-note-file "~/Dropbox/Org/Notes/inbox.org")
+
+    ;; Open org-default-note-file
+    (global-set-key (kbd "C-c o o d")
+                    (lambda () (interactive) (find-file "~/Dropbox/Org/Notes/inbox.org")))
+
     ;; Set file to save todo items
     (setq org-agenda-files '("~/Dropbox/Org/Todo/inbox.org"
                              "~/Dropbox/Org/Todo/projects.org"))
@@ -312,9 +319,8 @@ Change META key to COMMAND key.
     (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
 
     ;; Set org-capture templates
-    (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                               (file+headline "~/Dropbox/Org/Todo/inbox.org" "Tasks")
-                               "* TODO %i%?")))))
+    (setq org-capture-templates '(("t" "Todo [inbox]" entry (file+headline "~/Dropbox/Org/Todo/inbox.org" "Tasks") "** TODO %i%?")
+                                  ("n" "Note [inbox]" entry (file+headline "~/Dropbox/Org/Notes/inbox.org" "Notes") "** %i%?")))))
 
 (use-package org-download
   :ensure t)
