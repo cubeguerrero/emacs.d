@@ -272,7 +272,7 @@ Change META key to COMMAND key.
   :ensure t
   :diminish (dimmer-mode)
   :config
-  (setq dimmer-fraction 0.5)
+  (setq dimmer-fraction 0.3)
   (dimmer-mode))
 #+END_SRC
 

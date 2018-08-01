@@ -55,6 +55,8 @@ configuration.el
 configuration.local.el
 configuration.local.org
 
+custom.el
+
 projectile.cache
 
 bookmarks
