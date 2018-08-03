@@ -205,8 +205,8 @@ Change META key to COMMAND key.
 *** User Interface
 **** Base
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default t :font "Iosevka 14")
-(set-face-font 'default "Iosevka-14")
+(set-face-attribute 'default t :font "SF Mono 14")
+(set-face-font 'default "SF Mono-14")
 (prettify-symbols-mode t)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode t)
 #+END_SRC
@@ -231,9 +231,10 @@ Change META key to COMMAND key.
 (use-package smart-mode-line
   :ensure t
   :config
+  (setq sml/line-number-format "%4l")
   (setq sml/shorten-directory t)
   (setq sml/shorten-modes t)
-  (setq sml/name-width 40)
+  (setq sml/name-width 70)
   (setq sml/mode-width 'full)
   (setq sml/theme 'respectful)
   (if after-init-time
@@ -272,7 +273,7 @@ Change META key to COMMAND key.
   :ensure t
   :diminish (dimmer-mode)
   :config
-  (setq dimmer-fraction 0.3)
+  (setq dimmer-fraction 0.2)
   (dimmer-mode))
 #+END_SRC
 
