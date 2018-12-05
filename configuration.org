@@ -209,7 +209,7 @@ Change META key to COMMAND key.
 (set-face-font 'default "IBM Plex Mono-14")
 #+END_SRC
 
-**** doom-themes
+**** flucui-themes
 #+BEGIN_SRC emacs-lisp
 (use-package flucui-themes
   :ensure t
@@ -231,7 +231,7 @@ Change META key to COMMAND key.
   (setq sml/shorten-modes t)
   (setq sml/name-width 70)
   (setq sml/mode-width 'full)
-  (setq sml/theme 'light)
+  (setq sml/theme 'respectful)
   (if after-init-time
           (sml/setup)
           (add-hook 'after-init-hook 'sml/setup)))
