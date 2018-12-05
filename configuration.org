@@ -134,6 +134,7 @@ Change META key to COMMAND key.
 **** projectile
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
+  :diminish (projectile-mode)
   :ensure t
   :config
   (add-to-list 'projectile-globally-ignored-directories "*node_modules")
@@ -330,7 +331,7 @@ Change META key to COMMAND key.
     (setq org-default-note-file "~/Dropbox/Org/Notes/inbox.org")
 
     ;; Open org-default-note-file
-    (global-set-key (kbd "C-c o o d")
+    (global-set-key (kbd "C-c o d")
                     (lambda () (interactive) (find-file "~/Dropbox/Org/Notes/inbox.org")))
 
     ;; Set file to save todo items
@@ -482,12 +483,14 @@ Change META key to COMMAND key.
 ***** elixir-mode
 #+BEGIN_SRC emacs-lisp
 (use-package elixir-mode
+  :diminish (elixir-mode)
   :ensure t)
 #+END_SRC
 
 ***** alchemist
 #+BEGIN_SRC emacs-lisp
 (use-package alchemist
+  :diminish (alchemist-mode)
   :ensure t)
 #+END_SRC
 
@@ -495,6 +498,7 @@ Change META key to COMMAND key.
 ***** haskell-mode
 #+BEGIN_SRC emacs-lisp
 (use-package haskell-mode
+  :diminish (haskell-mode)
   :ensure t
   :mode (("\\.hs\\'" . haskell-mode)
          ("\\.lhs\\'" . haskell-mode)
@@ -516,6 +520,7 @@ Change META key to COMMAND key.
 ***** web-mode
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
+  :diminish (web-mode)
   :ensure t
   :mode (("\\.erb\\'" . web-mode)
          ("\\.html?\\'" . web-mode)
@@ -536,6 +541,7 @@ Change META key to COMMAND key.
 ***** dockerfile-mode
 #+BEGIN_SRC emacs-lisp
 (use-package dockerfile-mode
+  :diminish (dockerfile-mode)
   :ensure t
   :mode (("Dockerfile\\'" . dockerfile-mode)))
 #+END_SRC
