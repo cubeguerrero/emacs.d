@@ -213,32 +213,27 @@ Change META key to COMMAND key.
 
 **** color-themes
 #+BEGIN_SRC emacs-lisp
-(use-package color-theme-sanityinc-tomorrow
+(use-package doom-themes
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-day))
+  (setq doom-themes-enable-bold t  ; if nil, bold is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one-light)
+  (doom-themes-org-config))
 
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
 #+END_SRC
-
-**** smart-mode-line
+**** doom-modeline
 #+BEGIN_SRC emacs-lisp
-(use-package smart-mode-line
+(use-package doom-modeline
   :ensure t
+  :defer t
+  :hook (after-init . doom-modeline-init)
   :config
-  (setq sml/line-number-format "%4l")
-  (setq sml/shorten-directory t)
-  (setq sml/shorten-modes t)
-  (setq sml/name-width 70)
-  (setq sml/mode-width 'full)
-  (setq sml/theme 'respectful)
-  (if after-init-time
-          (sml/setup)
-          (add-hook 'after-init-hook 'sml/setup)))
+  (setq doom-modeline-icon nil))
 #+END_SRC
-
 **** column-enforce-mode
 #+BEGIN_SRC emacs-lisp
 (use-package column-enforce-mode
