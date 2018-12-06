@@ -136,6 +136,7 @@ Change META key to COMMAND key.
 (use-package projectile
   :diminish (projectile-mode)
   :ensure t
+  :diminish (projectile-mode)
   :config
   (add-to-list 'projectile-globally-ignored-directories "*node_modules")
   (projectile-mode +1)
@@ -442,6 +443,7 @@ Change META key to COMMAND key.
 (use-package js2-mode
   :ensure t
   :mode ("\\.js\\'" . js2-mode)
+  :diminish (js2-mode)
   :commands js2-mode
   :config
   (setq-default js2-basic-offset 2
@@ -454,6 +456,7 @@ Change META key to COMMAND key.
 (use-package json-mode
   :ensure t
   :mode "\\.json$"
+  :diminish (json-mode)
   :config
   (setq json-reformat:indent-width 2
         js-indent-level 2))
@@ -465,6 +468,7 @@ Change META key to COMMAND key.
   :ensure t
   :mode (("\\.jade\\'" . pug-mode)
          ("\\.pug\\'" . pug-mode))
+  :diminish (pug-mode)
   :config
   (setq pug-tab-width 2))
 #+END_SRC
