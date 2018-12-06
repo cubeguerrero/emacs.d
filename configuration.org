@@ -206,8 +206,8 @@ Change META key to COMMAND key.
 *** User Interface
 **** Base
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default t :font "IBM Plex Mono 14")
-(set-face-font 'default "IBM Plex Mono-14")
+(set-face-attribute 'default t :font "IBM Plex Mono 13")
+(set-face-font 'default "IBM Plex Mono-13")
 #+END_SRC
 
 **** color-themes
