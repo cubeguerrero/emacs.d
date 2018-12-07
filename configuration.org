@@ -433,6 +433,11 @@ Change META key to COMMAND key.
 #+END_SRC
 
 **** javascript
+***** prettier
+#+BEGIN_SRC emacs-lisp
+(use-package prettier-js
+  :ensure t)
+#+END_SRC
 ***** js2-mode
 #+BEGIN_SRC emacs-lisp
 (use-package js2-mode
@@ -444,6 +449,9 @@ Change META key to COMMAND key.
   (setq-default js2-basic-offset 2
                 js2-mode-show-parse-errors nil
                 js2-mode-show-strict-warnings nil))
+
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+(add-hook 'js2-mode-hook #'prettier-js-mode)
 #+END_SRC
 
 ***** json-mode
@@ -534,6 +542,11 @@ Change META key to COMMAND key.
           web-mode-css-indent-offset 2
           web-mode-code-indent-offset 2
           web-mode-engines-alist '(("django" . "\\.html\\'")))))
+
+(add-hook 'web-mode-hook #'(lambda ()
+                            (enable-minor-mode
+                             '("\\.jsx?\\'" . prettier-js-mode)
+                             '("\\.vue?\\'" . prettier-js-mode))))
 #+END_SRC
 
 **** docker
