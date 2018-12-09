@@ -202,7 +202,7 @@ Change META key to COMMAND key.
          ("C-c t h" . cube/multi-term-horizontal)
          ("C-c t t" . cube/multi-term))
   :config
-  (setq multi-term-program "/usr/local/bin/fish"))
+  (setq multi-term-program "/usr/local/bin/zsh"))
 #+END_SRC
 *** User Interface
 **** Base
