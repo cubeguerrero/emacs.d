@@ -15,7 +15,7 @@ Basic configuration to make Emacs default behavior better.
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups"))                  ; which directory to put backups file
-      auto-save-file-name-transforms '((".*" "~/.emacs.d//auto-save-list/" t)) ; transform backups file name
+      auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ; transform backups file name
       coding-system-for-read 'utf-8	; use utf-8 by default
       coding-system-for-write 'utf-8    ; Use utf-8 by default
       delete-old-versions -1            ; delete excess backup versions silently
@@ -27,6 +27,9 @@ Basic configuration to make Emacs default behavior better.
 
 ;; delete the selection with a keypress
 (delete-selection-mode t)
+
+;; Auto revert buffers on file change
+(global-auto-revert-mode t)
 
 ;; Hide menu-bar, tool-bar, and scroll-bar
 (when window-system
@@ -255,6 +258,21 @@ Change META key to COMMAND key.
   :ensure t
   :bind ("C-c w a" . avy-goto-char-2))
 #+END_SRC
+**** dashboad
+#+BEGIN_SRC emacs-lisp
+(use-package page-break-lines
+  :ensure t)
+
+(use-package dashboard
+  :ensure t
+  :config
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-items '((recents  . 5)
+                        (bookmarks . 5)
+                        (projects . 5)
+                        (agenda . 5)))
+  (dashboard-setup-startup-hook))
+#+END_SRC
 
 *** Visual
 **** dimmer
@@ -445,6 +463,8 @@ Change META key to COMMAND key.
   :commands js2-mode
   :config
   (setq-default js2-basic-offset 2
+                tab-width 2
+                indent-tabs-mode nil
                 js2-mode-show-parse-errors nil
                 js2-mode-show-strict-warnings nil))
 
