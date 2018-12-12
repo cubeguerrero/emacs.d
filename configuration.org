@@ -268,7 +268,6 @@ Change META key to COMMAND key.
   :config
   (setq dashboard-startup-banner 'logo)
   (setq dashboard-items '((recents  . 5)
-                        (bookmarks . 5)
                         (projects . 5)
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
