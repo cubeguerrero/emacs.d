@@ -5,8 +5,7 @@
 Basic configuration to make Emacs default behavior better.
 
 #+BEGIN_SRC emacs-lisp
-(setq initial-scratch-message "Welcome in Emacs"
-      inhibit-startup-screen t
+(setq inhibit-startup-screen t
       ring-bell-function 'ignore)
 
 (setq-default major-mode #'text-mode)
@@ -219,7 +218,7 @@ Change META key to COMMAND key.
   :config
   (setq doom-themes-enable-bold t  ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-tomorrow-day)
+  (load-theme 'doom-one-light)
   (doom-themes-org-config))
 
 (set-face-attribute 'fringe nil
@@ -268,7 +267,6 @@ Change META key to COMMAND key.
   :config
   (setq dashboard-startup-banner 'logo)
   (setq dashboard-items '((recents  . 5)
-                        (bookmarks . 5)
                         (projects . 5)
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
@@ -295,6 +293,17 @@ Change META key to COMMAND key.
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 
+**** pomidor
+#+BEGIN_SRC emacs-lisp
+(use-package pomidor
+  :ensure t
+  :commands (pomidor)
+  :config
+  (setq pomidor-sound-tick nil
+      pomidor-sound-tack nil))
+
+(global-set-key (kbd "<f12>") #'pomidor)
+#+END_SRC
 *** Editing
 **** expand-region
 #+BEGIN_SRC emacs-lisp
