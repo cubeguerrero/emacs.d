@@ -51,7 +51,7 @@ projectile-bookmarks.eld
 # recentf
 recentf
 
-configuration.el
+README.el
 configuration.local.el
 configuration.local.org
 

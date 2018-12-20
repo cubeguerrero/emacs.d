@@ -1,74 +1,29 @@
-#+STARTUP: overview
+#+TITLE: Emacs Configuration
+#+AUTHOR: Cuthbert Allan Y. Guerrero
+#+STARTUP: showall
 
-* My Emacs Configuration
-** General
-Basic configuration to make Emacs default behavior better.
+* Personal Information
+#+BEGIN_QUOTE
+Remember who you are
+
+- Mufasa
+#+END_QUOTE
 
 #+BEGIN_SRC emacs-lisp
-(setq inhibit-startup-screen t
-      ring-bell-function 'ignore)
-
-(setq-default major-mode #'text-mode)
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-(setq backup-directory-alist `(("." . "~/.emacs.d/backups"))                  ; which directory to put backups file
-      auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ; transform backups file name
-      coding-system-for-read 'utf-8	; use utf-8 by default
-      coding-system-for-write 'utf-8    ; Use utf-8 by default
-      delete-old-versions -1            ; delete excess backup versions silently
-      version-control t                 ; use version control
-      vc-make-backup-files t            ; make backups file even when in version controlled dir
-      vc-follow-symlinks t		; don't ask for confirmation when opening symlinked file
-      default-fill-column 80            ; toggle wrapping text at the 80th character
-      sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
-
-;; delete the selection with a keypress
-(delete-selection-mode t)
-
-;; Auto revert buffers on file change
-(global-auto-revert-mode t)
-
-;; Hide menu-bar, tool-bar, and scroll-bar
-(when window-system
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1))
-
-;; Initialize show-paren-mode
-(show-paren-mode 1)
-(setq-default show-paren-delay 0)
-
-;; Always use spaces instead of tabs
-(setq-default indent-tabs-mode nil)
-
-;; Remove whitespace on save
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
-;; Autoreload files open on buffer
-(global-auto-revert-mode t)
-
-;; Toggle fullscreen
-(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+  (setq user-full-name "Cuthbert Allan Y. Guerrero"
+        user-mail-address "cuthbert.guerrero@gmail.com")
 #+END_SRC
 
-*** OS Specific (Mac)
-Change META key to COMMAND key.
+* Initialize
+Setup ~package~ and ~use-package~
 #+BEGIN_SRC emacs-lisp
-(when (eq system-type 'darwin)
-  (require 'ls-lisp)
-  (setq-default ls-lisp-use-insert-directory-program nil)
-  (setq-default mac-option-key-is-meta nil
-      mac-command-key-is-meta t
-      mac-command-modifier 'meta
-      mac-option-modifier 'none))
-#+END_SRC
+(require 'package)
+(package-initialize)
 
-** Packages
-*** Base
-**** use-package
-#+BEGIN_SRC emacs-lisp
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/")
+             '("org" . "http://orgmode.org/elpa/"))
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -77,7 +32,46 @@ Change META key to COMMAND key.
   (require 'use-package))
 #+END_SRC
 
-**** diminish
+* Defaults
+Basic configuration to make Emacs default behavior better.
+#+BEGIN_SRC emacs-lisp
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(delete-selection-mode t)
+(global-auto-revert-mode t)
+(show-paren-mode 1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+(setq-default show-paren-delay 0)
+(setq-default indent-tabs-mode nil)
+(setq-default major-mode #'text-mode)
+(setq ring-bell-function 'ignore
+      make-backup-files nil
+      auto-save-default nil
+      delete-old-versions -1            ; delete excess backup versions silently
+      version-control t                 ; use version control
+      vc-make-backup-files t            ; make backups file even when in version controlled dir
+      vc-follow-symlinks t              ; don't ask for confirmation when opening symlinked file
+      sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
+
+(when (eq system-type 'darwin)
+  (require 'ls-lisp)
+  (setq-default ls-lisp-use-insert-directory-program nil)
+  (setq-default mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'none))
+
+;; Toggle fullscreen
+(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+#+END_SRC
+
+* Diminish
+Diminish minor modes to remove noise from the modeline
 #+BEGIN_SRC emacs-lisp
 (use-package diminish
   :ensure t)
@@ -88,7 +82,8 @@ Change META key to COMMAND key.
 (diminish 'abbrev-mode)
 #+END_SRC
 
-**** which-key
+* Which-key
+Allows Emacs to show hints on what key combinations there are.
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
   :ensure t
@@ -97,8 +92,8 @@ Change META key to COMMAND key.
   (which-key-mode))
 #+END_SRC
 
-*** File
-**** ivy
+* Ivy
+Ido replacement
 #+BEGIN_SRC emacs-lisp
 (use-package ivy
   :ensure t
@@ -106,20 +101,14 @@ Change META key to COMMAND key.
   :config
   (setq ivy-use-virtual-buffers t
             ivy-count-format "%d/%d "))
-#+END_SRC
 
-**** counsel
-#+BEGIN_SRC emacs-lisp
 (use-package counsel
   :ensure t
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-c g" . counsel-git)
          ("C-c G" . counsel-git-grep)))
-#+END_SRC
 
-**** swiper
-#+BEGIN_SRC emacs-lisp
 (use-package swiper
   :ensure t
   :bind (("C-s" . swiper)
@@ -133,7 +122,7 @@ Change META key to COMMAND key.
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
 #+END_SRC
 
-**** projectile
+* Projectile
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
   :diminish (projectile-mode)
@@ -147,18 +136,16 @@ Change META key to COMMAND key.
         '(:eval (format " [%s]" (projectile-project-name))))
   (setq projectile-remember-window-configs t
         projectile-completion-system 'ivy))
-#+END_SRC
 
-**** counsel-projectile
-#+BEGIN_SRC emacs-lisp
 (use-package counsel-projectile
   :ensure t
   :config
   (counsel-projectile-mode))
 #+END_SRC
 
-*** Term
-**** exec-path-from-shell
+* Term
+Some helpful package to deal with term mode in Emacs.
+** exec-path-from-shell
 #+BEGIN_SRC emacs-lisp
 (use-package exec-path-from-shell
   :ensure t
@@ -167,7 +154,7 @@ Change META key to COMMAND key.
   (exec-path-from-shell-initialize))
 #+END_SRC
 
-**** multi-term
+** multi-term
 #+BEGIN_SRC emacs-lisp
 ;; Open multi-term consider projectile root
 (defun cube/multi-term ()
@@ -204,14 +191,18 @@ Change META key to COMMAND key.
          ("C-c t h" . cube/multi-term-horizontal)
          ("C-c t t" . cube/multi-term)))
 #+END_SRC
-*** User Interface
-**** Base
+
+* User Interface
+** Fonts
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute 'default t :font "IBM Plex Mono 14")
 (set-face-font 'default "IBM Plex Mono-14")
+(set-face-attribute 'fringe nil
+                  :foreground (face-foreground 'default)
+                  :background (face-background 'default))
 #+END_SRC
 
-**** color-themes
+** Doom Theme
 #+BEGIN_SRC emacs-lisp
 (use-package doom-themes
   :ensure t
@@ -220,12 +211,9 @@ Change META key to COMMAND key.
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (load-theme 'doom-one-light)
   (doom-themes-org-config))
-
-(set-face-attribute 'fringe nil
-                  :foreground (face-foreground 'default)
-                  :background (face-background 'default))
 #+END_SRC
-**** doom-modeline
+
+** Doom Modeline
 #+BEGIN_SRC emacs-lisp
 (use-package doom-modeline
   :ensure t
@@ -234,30 +222,9 @@ Change META key to COMMAND key.
   :config
   (setq doom-modeline-icon nil))
 #+END_SRC
-**** column-enforce-mode
-#+BEGIN_SRC emacs-lisp
-(use-package column-enforce-mode
-  :ensure t
-  :diminish (column-enforce-mode)
-  :config
-  (setq column-enforce-column 80)
-  (global-column-enforce-mode t))
-#+END_SRC
 
-**** ace-window
-#+BEGIN_SRC emacs-lisp
-(use-package ace-window
-  :ensure t
-  :bind ("C-c w w" . ace-window))
-#+END_SRC
-
-**** avy
-#+BEGIN_SRC emacs-lisp
-(use-package avy
-  :ensure t
-  :bind ("C-c w a" . avy-goto-char-2))
-#+END_SRC
-**** dashboad
+** Dashboard
+Awesome initial screen
 #+BEGIN_SRC emacs-lisp
 (use-package page-break-lines
   :ensure t)
@@ -266,14 +233,13 @@ Change META key to COMMAND key.
   :ensure t
   :config
   (setq dashboard-startup-banner 'logo)
-  (setq dashboard-items '((recents  . 5)
+  (setq dashboard-items '((recents  . 10)
                         (projects . 5)
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 #+END_SRC
 
-*** Visual
-**** dimmer
+** Dimmer
 #+BEGIN_SRC emacs-lisp
 (use-package dimmer
   :ensure t
@@ -283,7 +249,40 @@ Change META key to COMMAND key.
   (dimmer-mode))
 #+END_SRC
 
-**** rainbow-delimiters
+* Navigation
+** Ace Window
+Easy
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :ensure t
+  :bind (("C-c w w" . ace-window)
+         ("C-c w k" . ace-delete-window)))
+#+END_SRC
+
+** Avy
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :ensure t
+  :bind ("C-c w a" . avy-goto-char-2))
+
+#+END_SRC
+
+* Git Integration
+** Magit
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :ensure t
+  :commands (magit-status projectile-vc)
+  :bind (("C-x g s" . magit-status)
+         ("C-x g b" . magit-blame))
+  :config
+  (add-to-list 'magit-log-arguments "--no-abbrev-commit")
+  (setq magit-popup-use-prefix-argument 'default
+        magit-completing-read-function 'ivy-completing-read))
+#+END_SRC
+
+* Editor
+** Rainbow Delimiters
 #+BEGIN_SRC emacs-lisp
 (use-package rainbow-delimiters
   :ensure t
@@ -293,45 +292,30 @@ Change META key to COMMAND key.
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 
-**** pomidor
+** Smartparens
 #+BEGIN_SRC emacs-lisp
-(use-package pomidor
+(use-package smartparens
   :ensure t
-  :commands (pomidor)
+  :diminish (smartparens-mode)
   :config
-  (setq pomidor-sound-tick nil
-      pomidor-sound-tack nil))
-
-(global-set-key (kbd "<f12>") #'pomidor)
+  (require 'smartparens-config)
+  (add-hook 'prog-mode-hook #'smartparens-mode))
 #+END_SRC
-*** Editing
-**** expand-region
+
+** Expand Region
 #+BEGIN_SRC emacs-lisp
 (use-package expand-region
   :ensure t
-  :bind ("C-c e r" . er/expand-region))
+  :bind ("C-=" . er/expand-region))
 #+END_SRC
 
-*** Git Integration
-**** magit
-#+BEGIN_SRC emacs-lisp
-(use-package magit
-  :ensure t
-  :commands (magit-status projectile-vc)
-  :bind ("C-x g" . magit-status)
-  :config
-  (add-to-list 'magit-log-arguments "--no-abbrev-commit")
-  (setq magit-popup-use-prefix-argument 'default
-        magit-completing-read-function 'ivy-completing-read))
-#+END_SRC
-*** Note Taking
-**** org-mode
+* Note Taking
+** Org Mode
 #+BEGIN_SRC emacs-lisp
 (use-package org
   :ensure t
   :mode ("\\.org$" . org-mode)
-  :bind (("C-c l" . org-store-link)
-         ("C-c a" . org-agenda)
+  :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture)
          ("C-c b" . org-iswitchb))
   :config
@@ -373,7 +357,7 @@ Change META key to COMMAND key.
   :ensure t)
 #+END_SRC
 
-**** markdown-mode
+** Markdown Mode
 #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
   :ensure t
@@ -383,8 +367,9 @@ Change META key to COMMAND key.
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 #+END_SRC
-*** Programming
-**** flycheck
+
+* Programming
+** Flycheck
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
   :ensure t
@@ -394,7 +379,7 @@ Change META key to COMMAND key.
   (add-hook 'after-init-hook #'global-flycheck-mode))
 #+END_SRC
 
-**** company-mode
+** Company Mode
 #+BEGIN_SRC emacs-lisp
 (use-package company
   :ensure t
@@ -403,18 +388,7 @@ Change META key to COMMAND key.
   (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
 
-**** smartparens
-#+BEGIN_SRC emacs-lisp
-(use-package smartparens
-  :ensure t
-  :diminish (smartparens-mode)
-  :config
-  (require 'smartparens-config)
-  (add-hook 'prog-mode-hook #'smartparens-mode))
-#+END_SRC
-
-**** ruby
-***** enhanced-ruby-mode
+** Ruby
 #+BEGIN_SRC emacs-lisp
 (use-package enh-ruby-mode
   :ensure t
@@ -436,10 +410,7 @@ Change META key to COMMAND key.
           enh-ruby-bounce-deep-indent t
           enh-ruby-hanging-indent-level 2)
     (setq ruby-insert-encoding-magic-comment nil)))
-#+END_SRC
 
-***** robe-mode
-#+BEGIN_SRC emacs-lisp
 (use-package robe
   :ensure
   :diminish (robe-mode)
@@ -448,8 +419,7 @@ Change META key to COMMAND key.
   (eval-after-load 'company '(push 'company-robe company-backends)))
 #+END_SRC
 
-**** YAML
-***** yaml-mode
+** YAML
 #+BEGIN_SRC emacs-lisp
 (use-package yaml-mode
   :ensure
@@ -457,14 +427,12 @@ Change META key to COMMAND key.
   :diminish (yaml-mode))
 #+END_SRC
 
-**** javascript
-***** prettier
+** Javascript
+
 #+BEGIN_SRC emacs-lisp
 (use-package prettier-js
   :ensure t)
-#+END_SRC
-***** js2-mode
-#+BEGIN_SRC emacs-lisp
+
 (use-package js2-mode
   :ensure t
   :mode ("\\.js\\'" . js2-mode)
@@ -479,10 +447,7 @@ Change META key to COMMAND key.
 
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 (add-hook 'js2-mode-hook #'prettier-js-mode)
-#+END_SRC
 
-***** json-mode
-#+BEGIN_SRC emacs-lisp
 (use-package json-mode
   :ensure t
   :mode "\\.json$"
@@ -490,10 +455,7 @@ Change META key to COMMAND key.
   :config
   (setq json-reformat:indent-width 2
         js-indent-level 2))
-#+END_SRC
 
-***** pug-mode
-#+BEGIN_SRC emacs-lisp
 (use-package pug-mode
   :ensure t
   :mode (("\\.jade\\'" . pug-mode)
@@ -501,10 +463,7 @@ Change META key to COMMAND key.
   :diminish (pug-mode)
   :config
   (setq pug-tab-width 2))
-#+END_SRC
 
-***** company-tern
-#+BEGIN_SRC emacs-lisp
 (use-package company-tern
   :ensure t
   :diminish (tern-mode)
@@ -513,23 +472,18 @@ Change META key to COMMAND key.
   (eval-after-load 'company '(push 'company-tern company-backends)))
 #+END_SRC
 
-**** elixir
-***** elixir-mode
+** Elixir
 #+BEGIN_SRC emacs-lisp
 (use-package elixir-mode
   :diminish (elixir-mode)
   :ensure t)
-#+END_SRC
 
-***** alchemist
-#+BEGIN_SRC emacs-lisp
 (use-package alchemist
   :diminish (alchemist-mode)
   :ensure t)
 #+END_SRC
 
-**** haskell
-***** haskell-mode
+** Haskell
 #+BEGIN_SRC emacs-lisp
 (use-package haskell-mode
   :diminish (haskell-mode)
@@ -541,8 +495,7 @@ Change META key to COMMAND key.
          ("\\.c2hs\\'" . haskell-mode)))
 #+END_SRC
 
-**** python
-***** pipenv-mode
+** Python
 #+BEGIN_SRC emacs-lisp
 (use-package pipenv
   :ensure t
@@ -550,8 +503,7 @@ Change META key to COMMAND key.
   :hook (python-mode . pipenv-mode))
 #+END_SRC
 
-**** web technologies
-***** web-mode
+** Web
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
   :diminish (web-mode)
@@ -576,8 +528,7 @@ Change META key to COMMAND key.
                              '("\\.vue?\\'" . prettier-js-mode))))
 #+END_SRC
 
-**** docker
-***** dockerfile-mode
+** Docker
 #+BEGIN_SRC emacs-lisp
 (use-package dockerfile-mode
   :diminish (dockerfile-mode)
