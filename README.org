@@ -209,7 +209,7 @@ Some helpful package to deal with term mode in Emacs.
   :config
   (setq doom-themes-enable-bold t  ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-one-light)
+  (load-theme 'doom-one)
   (doom-themes-org-config))
 #+END_SRC
 
@@ -368,7 +368,7 @@ Easy
   :init (setq markdown-command "multimarkdown"))
 #+END_SRC
 
-* Programming
+* Language
 ** Flycheck
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
@@ -522,10 +522,7 @@ Easy
           web-mode-code-indent-offset 2
           web-mode-engines-alist '(("django" . "\\.html\\'")))))
 
-(add-hook 'web-mode-hook #'(lambda ()
-                            (enable-minor-mode
-                             '("\\.jsx?\\'" . prettier-js-mode)
-                             '("\\.vue?\\'" . prettier-js-mode))))
+(add-hook 'web-mode-hook 'prettier-js-mode)
 #+END_SRC
 
 ** Docker
