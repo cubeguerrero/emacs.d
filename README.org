@@ -202,15 +202,18 @@ Some helpful package to deal with term mode in Emacs.
                   :background (face-background 'default))
 #+END_SRC
 
-** Doom Theme
+** Flucui Theme
 #+BEGIN_SRC emacs-lisp
-(use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t  ; if nil, bold is universally disabled
-      doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-one-light)
-  (doom-themes-org-config))
+(use-package flucui-themes
+  :ensure t)
+#+END_SRC
+
+** Kaolin Theme
+#+BEGIN_SRC emacs-lisp
+(use-package kaolin-themes
+   :ensure t
+   :config
+   (load-theme 'kaolin-valley-light t))
 #+END_SRC
 
 ** Doom Modeline
@@ -355,6 +358,11 @@ Easy
 
 (use-package org-download
   :ensure t)
+
+(use-package org-bullets
+  :ensure t
+  :commands (org-bullets-mode)
+  :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
 ** Markdown Mode
@@ -531,4 +539,18 @@ Easy
   :diminish (dockerfile-mode)
   :ensure t
   :mode (("Dockerfile\\'" . dockerfile-mode)))
+#+END_SRC
+
+** Rust
+#+BEGIN_SRC emacs-lisp
+(use-package rust-mode
+  :diminish (rust-mode)
+  :ensure t
+  :mode (("\\.rs\\'" . rust-mode)))
+
+(use-package flycheck-rust
+  :ensure t
+  :config
+  (with-eval-after-load 'rust-mode
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 #+END_SRC
