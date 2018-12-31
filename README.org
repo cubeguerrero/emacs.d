@@ -202,18 +202,12 @@ Some helpful package to deal with term mode in Emacs.
                   :background (face-background 'default))
 #+END_SRC
 
-** Flucui Theme
+** Color Theme
 #+BEGIN_SRC emacs-lisp
 (use-package flucui-themes
-  :ensure t)
-#+END_SRC
-
-** Kaolin Theme
-#+BEGIN_SRC emacs-lisp
-(use-package kaolin-themes
-   :ensure t
-   :config
-   (load-theme 'kaolin-valley-light t))
+  :ensure t
+  :config
+  (flucui-themes-load-style 'light))
 #+END_SRC
 
 ** Doom Modeline
@@ -318,15 +312,15 @@ Easy
 (use-package org
   :ensure t
   :mode ("\\.org$" . org-mode)
-  :bind (("C-c a" . org-agenda)
-         ("C-c c" . org-capture)
-         ("C-c b" . org-iswitchb))
+  :bind (("C-c o a" . org-agenda)
+         ("C-c o c" . org-capture)
+         ("C-c o b" . org-iswitchb))
   :config
   (progn
     ;; Hide leading stars
     (setq org-hide-leading-stars t)
 
-    ;; Set org director
+    ;; Set org directory
     (setq org-directory "~/Dropbox/Org")
 
     ;; Fontify code in code blocks
@@ -344,7 +338,8 @@ Easy
 
     ;; Set file to save todo items
     (setq org-agenda-files '("~/Dropbox/Org/Todo/inbox.org"
-                             "~/Dropbox/Org/Todo/projects.org"))
+                             "~/Dropbox/Org/Todo/projects.org"
+                             "~/Dropbox/Org/Todo/tickler.org"))
 
     ;; Set how to keep track of finished TODO
     (setq org-log-done 'time)
@@ -352,9 +347,15 @@ Easy
     ;; Set org-mode todo keywords
     (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
 
+    ;; Set org-refile targets
+    (setq org-refile-targets '(("~/Dropbox/Org/Todo/projects.org" :maxlevel . 3)
+                               ("~/Dropbox/Org/Todo/someday.org" :level . 1)
+                               ("~/Dropbox/Org/Todo/tickler.org" :maxlevel . 2)))
+
     ;; Set org-capture templates
     (setq org-capture-templates '(("t" "Todo [inbox]" entry (file+headline "~/Dropbox/Org/Todo/inbox.org" "Tasks") "** TODO %i%?")
-                                  ("n" "Note [inbox]" entry (file+headline "~/Dropbox/Org/Notes/inbox.org" "Notes") "** %i%?")))))
+                                  ("T" "Tickler" entry (file+headline "~/Dropbox/Org/Todo/tickler.org" "Tickler") "* %i%? \n %U")
+                                  ("n" "Note" entry (file+headline "~/Dropbox/Org/Notes/inbox.org" "Notes") "* NOTE %?\n%U" :empty-lines 1)))))
 
 (use-package org-download
   :ensure t)
@@ -393,6 +394,7 @@ Easy
   :ensure t
   :diminish (company-mode)
   :config
+  (setq company-tooltip-align-annotations t)
   (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
 
@@ -553,4 +555,12 @@ Easy
   :config
   (with-eval-after-load 'rust-mode
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+
+(use-package racer
+  :ensure t
+  :diminish (racer-mode-hook)
+  :config
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode))
 #+END_SRC
