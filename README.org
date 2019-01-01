@@ -204,10 +204,7 @@ Some helpful package to deal with term mode in Emacs.
 
 ** Color Theme
 #+BEGIN_SRC emacs-lisp
-(use-package flucui-themes
-  :ensure t
-  :config
-  (flucui-themes-load-style 'light))
+(load-theme 'leuven t)
 #+END_SRC
 
 ** Doom Modeline
@@ -309,6 +306,7 @@ Easy
 * Note Taking
 ** Org Mode
 #+BEGIN_SRC emacs-lisp
+(load-library "find-lisp")
 (use-package org
   :ensure t
   :mode ("\\.org$" . org-mode)
@@ -316,46 +314,28 @@ Easy
          ("C-c o c" . org-capture)
          ("C-c o b" . org-iswitchb))
   :config
-  (progn
-    ;; Hide leading stars
-    (setq org-hide-leading-stars t)
+  (setq org-hide-leading-stars t
+        org-src-fontify-natively t
+        org-startup-with-inline-images t
+        org-log-done 'time)
 
-    ;; Set org directory
-    (setq org-directory "~/Dropbox/Org")
+  ;; Set default notes file
+  (setq org-directory "~/Dropbox/Org")
+  (setq org-default-note-file "~/Dropbox/Org/inbox.org")
+  (global-set-key (kbd "C-c o d") (lambda () (interactive) (find-file org-default-note-file)))
+  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+  (setq org-agenda-files '("~/Dropbox/Org/inbox.org"
+                           "~/Dropbox/Org/projects.org"
+                           "~/Dropbox/Org/tickler.org"))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq org-outline-path-complete-in-steps nil)
+  (setq org-refile-use-outline-path file)
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
 
-    ;; Fontify code in code blocks
-    (setq org-src-fontify-natively t)
-
-    ;; Inline images
-    (setq org-startup-with-inline-images t)
-
-    ;; Set default notes file
-    (setq org-default-note-file "~/Dropbox/Org/Notes/inbox.org")
-
-    ;; Open org-default-note-file
-    (global-set-key (kbd "C-c o d")
-                    (lambda () (interactive) (find-file "~/Dropbox/Org/Notes/inbox.org")))
-
-    ;; Set file to save todo items
-    (setq org-agenda-files '("~/Dropbox/Org/Todo/inbox.org"
-                             "~/Dropbox/Org/Todo/projects.org"
-                             "~/Dropbox/Org/Todo/tickler.org"))
-
-    ;; Set how to keep track of finished TODO
-    (setq org-log-done 'time)
-
-    ;; Set org-mode todo keywords
-    (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
-
-    ;; Set org-refile targets
-    (setq org-refile-targets '(("~/Dropbox/Org/Todo/projects.org" :maxlevel . 3)
-                               ("~/Dropbox/Org/Todo/someday.org" :level . 1)
-                               ("~/Dropbox/Org/Todo/tickler.org" :maxlevel . 2)))
-
-    ;; Set org-capture templates
-    (setq org-capture-templates '(("t" "Todo [inbox]" entry (file+headline "~/Dropbox/Org/Todo/inbox.org" "Tasks") "** TODO %i%?")
-                                  ("T" "Tickler" entry (file+headline "~/Dropbox/Org/Todo/tickler.org" "Tickler") "* %i%? \n %U")
-                                  ("n" "Note" entry (file+headline "~/Dropbox/Org/Notes/inbox.org" "Notes") "* NOTE %?\n%U" :empty-lines 1)))))
+  ;; Set org-capture templates
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry (file+headline "~/Dropbox/Org/inbox.org" "Tasks") "** TODO %i%?")
+                                ("T" "Tickler" entry (file+headline "~/Dropbox/Org/tickler.org" "Tickler") "* %i%? \n %U")
+                                ("n" "Note" entry (file+headline "~/Dropbox/Org/inbox.org" "Notes") "* NOTE %?\n%U" :empty-lines 1))))
 
 (use-package org-download
   :ensure t)
