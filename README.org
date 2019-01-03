@@ -61,6 +61,8 @@ Basic configuration to make Emacs default behavior better.
 (when (eq system-type 'darwin)
   (require 'ls-lisp)
   (setq-default ls-lisp-use-insert-directory-program nil)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . light))
   (setq-default mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
@@ -215,7 +217,13 @@ Some helpful package to deal with term mode in Emacs.
 
 ** Color Theme
 #+BEGIN_SRC emacs-lisp
-(load-theme 'leuven t)
+(use-package solarized-theme
+  :ensure t)
+
+(use-package tao-theme
+  :ensure t
+  :config
+  (load-theme 'tao-yang t))
 #+END_SRC
 
 ** Doom Modeline
@@ -347,7 +355,7 @@ Easy
   (setq org-refile-allow-creating-parent-nodes 'confirm)
 
   ;; Set org-capture templates
-  (setq org-capture-templates '(("t" "Todo [inbox]" entry (file+headline "~/Dropbox/Org/inbox.org") "* TODO %i%?")
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry (file "~/Dropbox/Org/inbox.org") "* TODO %i%?")
                                 ("T" "Tickler" entry (file+headline "~/Dropbox/Org/tickler.org" "Tickler") "* %i%? \n %U")
                                 ("n" "Note" entry (file+headline "~/Dropbox/Org/inbox.org" "Notes") "* NOTE %?\n%U" :empty-lines 1))))
 
