@@ -126,7 +126,9 @@ Ido replacement
 
 (use-package all-the-icons-ivy
   :after (ivy all-the-icons)
-  :ensure t)
+  :ensure t
+  :config
+  (all-the-icons-ivy-setup))
 #+END_SRC
 
 * Projectile
@@ -205,8 +207,8 @@ Some helpful package to deal with term mode in Emacs.
 * User Interface
 ** Fonts
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default t :font "IBM Plex Mono 13")
-(set-face-font 'default "IBM Plex Mono-13")
+(set-face-attribute 'default t :font "IBM Plex Mono 14")
+(set-face-font 'default "IBM Plex Mono-14")
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
@@ -218,12 +220,9 @@ Some helpful package to deal with term mode in Emacs.
 ** Color Theme
 #+BEGIN_SRC emacs-lisp
 (use-package solarized-theme
-  :ensure t)
-
-(use-package tao-theme
   :ensure t
   :config
-  (load-theme 'tao-yang t))
+  (load-theme 'solarized-light t))
 #+END_SRC
 
 ** Doom Modeline
