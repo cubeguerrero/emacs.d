@@ -100,7 +100,8 @@ Ido replacement
   :diminish (ivy-mode)
   :config
   (setq ivy-use-virtual-buffers t
-            ivy-count-format "%d/%d "))
+        ivy-height 20
+        ivy-count-format "%d/%d "))
 
 (use-package counsel
   :ensure t
@@ -120,6 +121,10 @@ Ido replacement
     (setq ivy-use-virtual-buffers t
           ivy-display-style 'fancy)
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+
+(use-package all-the-icons-ivy
+  :after (ivy all-the-icons)
+  :ensure t)
 #+END_SRC
 
 * Projectile
@@ -139,6 +144,7 @@ Ido replacement
 
 (use-package counsel-projectile
   :ensure t
+  :after (projectile counsel)
   :config
   (counsel-projectile-mode))
 #+END_SRC
@@ -189,14 +195,16 @@ Some helpful package to deal with term mode in Emacs.
   :commands (multi-term)
   :bind (("C-c t v" . cube/multi-term-vertical)
          ("C-c t h" . cube/multi-term-horizontal)
-         ("C-c t t" . cube/multi-term)))
+         ("C-c t t" . cube/multi-term))
+  :config
+  (setq multi-term-program "/usr/local/bin/zsh"))
 #+END_SRC
 
 * User Interface
 ** Fonts
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default t :font "IBM Plex Mono 14")
-(set-face-font 'default "IBM Plex Mono-14")
+(set-face-attribute 'default t :font "IBM Plex Mono 13")
+(set-face-font 'default "IBM Plex Mono-13")
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
@@ -324,8 +332,11 @@ Easy
 
   ;; Set default notes file
   (setq org-directory "~/Dropbox/Org")
-  (setq org-default-note-file "~/Dropbox/Org/inbox.org")
-  (global-set-key (kbd "C-c o d") (lambda () (interactive) (find-file org-default-note-file)))
+  (setq org-startup-folder "content")
+  (setq org-inbox-file "~/Dropbox/Org/inbox.org")
+  (setq org-projects-file "~/Dropbox/Org/projects.org")
+  (global-set-key (kbd "C-c o d") (lambda () (interactive) (find-file org-inbox-file)))
+  (global-set-key (kbd "C-c o n") (lambda () (interactive) (find-file org-projects-file)))
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
   (setq org-agenda-files '("~/Dropbox/Org/inbox.org"
                            "~/Dropbox/Org/projects.org"
@@ -336,7 +347,7 @@ Easy
   (setq org-refile-allow-creating-parent-nodes 'confirm)
 
   ;; Set org-capture templates
-  (setq org-capture-templates '(("t" "Todo [inbox]" entry (file+headline "~/Dropbox/Org/inbox.org" "Tasks") "** TODO %i%?")
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry (file+headline "~/Dropbox/Org/inbox.org") "* TODO %i%?")
                                 ("T" "Tickler" entry (file+headline "~/Dropbox/Org/tickler.org" "Tickler") "* %i%? \n %U")
                                 ("n" "Note" entry (file+headline "~/Dropbox/Org/inbox.org" "Notes") "* NOTE %?\n%U" :empty-lines 1))))
 
