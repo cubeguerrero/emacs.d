@@ -219,10 +219,11 @@ Some helpful package to deal with term mode in Emacs.
 
 ** Color Theme
 #+BEGIN_SRC emacs-lisp
-(use-package solarized-theme
-  :ensure t)
-
-(load-theme 'leuven t)
+(use-package doom-themes
+  :ensure t
+  :config
+  (doom-themes-org-config)
+  (load-theme 'doom-one-light t))
 #+END_SRC
 
 ** Doom Modeline
