@@ -207,8 +207,8 @@ Some helpful package to deal with term mode in Emacs.
 * User Interface
 ** Fonts
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default t :font "IBM Plex Mono 14")
-(set-face-font 'default "IBM Plex Mono-14")
+(set-face-attribute 'default t :font "IBM Plex Mono 15")
+(set-face-font 'default "IBM Plex Mono-15")
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
@@ -223,7 +223,7 @@ Some helpful package to deal with term mode in Emacs.
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-one-light t))
+  (load-theme 'doom-nord-light t))
 #+END_SRC
 
 ** Doom Modeline
