@@ -94,12 +94,6 @@ Allows Emacs to show hints on what key combinations there are.
   (which-key-mode))
 #+END_SRC
 
-* Evil
-Use ~vi~ bindings
-#+BEGIN_SRC emacs-lisp
-
-#+END_SRC
-
 * Ivy
 Ido replacement
 #+BEGIN_SRC emacs-lisp
