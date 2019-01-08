@@ -62,7 +62,7 @@ Basic configuration to make Emacs default behavior better.
   (require 'ls-lisp)
   (setq-default ls-lisp-use-insert-directory-program nil)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (add-to-list 'default-frame-alist '(ns-appearance . light))
   (setq-default mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
@@ -92,6 +92,12 @@ Allows Emacs to show hints on what key combinations there are.
   :diminish (which-key-mode)
   :config
   (which-key-mode))
+#+END_SRC
+
+* Evil
+Use ~vi~ bindings
+#+BEGIN_SRC emacs-lisp
+
 #+END_SRC
 
 * Ivy
@@ -223,7 +229,7 @@ Some helpful package to deal with term mode in Emacs.
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-one t))
+  (load-theme 'doom-one-light t))
 #+END_SRC
 
 ** Doom Modeline
