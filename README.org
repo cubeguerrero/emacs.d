@@ -219,11 +219,10 @@ Some helpful package to deal with term mode in Emacs.
 
 ** Color Theme
 #+BEGIN_SRC emacs-lisp
-(use-package doom-themes
+(use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
-  (doom-themes-org-config)
-  (load-theme 'doom-one-light t))
+  (load-theme 'sanityinc-tomorrow-day t))
 #+END_SRC
 
 ** Doom Modeline

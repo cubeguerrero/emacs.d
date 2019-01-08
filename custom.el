@@ -11,7 +11,7 @@
     ("~/Dropbox/Org/Todo/tickler.org" "~/Dropbox/Org/Todo/inbox.org" "~/.emacs.d/README.org")))
  '(package-selected-packages
    (quote
-    (paper-theme ag racer flucui-theme org-bullets flycheck-rust org-bullet rust-mode spacemacs-theme spacemacs-themes pomidor dashboard page-break-lines xref-js2 js2-refactor prettier-js elixir-mode company doom-modeline projectile counsel ivy yaml-mode which-key web-mode use-package smartparens smart-mode-line robe rainbow-delimiters pug-mode pipenv org-download multi-term markdown-mode magit json-mode js2-mode haskell-mode flycheck expand-region exec-path-from-shell enh-ruby-mode dockerfile-mode dimmer diminish counsel-projectile company-tern column-enforce-mode alchemist ace-window))))
+    (color-theme-sanityinc-tomorrow paper-theme ag racer flucui-theme org-bullets flycheck-rust org-bullet rust-mode spacemacs-theme spacemacs-themes pomidor dashboard page-break-lines xref-js2 js2-refactor prettier-js elixir-mode company doom-modeline projectile counsel ivy yaml-mode which-key web-mode use-package smartparens smart-mode-line robe rainbow-delimiters pug-mode pipenv org-download multi-term markdown-mode magit json-mode js2-mode haskell-mode flycheck expand-region exec-path-from-shell enh-ruby-mode dockerfile-mode dimmer diminish counsel-projectile company-tern column-enforce-mode alchemist ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
