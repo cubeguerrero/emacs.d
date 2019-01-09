@@ -123,12 +123,6 @@ Ido replacement
     (setq ivy-use-virtual-buffers t
           ivy-display-style 'fancy)
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
-
-(use-package all-the-icons-ivy
-  :after (ivy all-the-icons)
-  :ensure t
-  :config
-  (all-the-icons-ivy-setup))
 #+END_SRC
 
 * Projectile
@@ -348,12 +342,14 @@ Easy
   (setq org-directory "~/Dropbox/Org")
   (setq org-startup-folder "content")
   (setq org-inbox-file "~/Dropbox/Org/inbox.org")
-  (setq org-projects-file "~/Dropbox/Org/projects.org")
+  (if (string-equal (system-name) "17853-cguerrero.local") ; check if I'm on my work computer
+      (setq org-projects-file "~/Google Drive/projects.org")
+    (setq org-projects-file "~/Dropbox/Org/projects.org"))
   (global-set-key (kbd "C-c o d") (lambda () (interactive) (find-file org-inbox-file)))
   (global-set-key (kbd "C-c o n") (lambda () (interactive) (find-file org-projects-file)))
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
-  (setq org-agenda-files '("~/Dropbox/Org/inbox.org"
-                           "~/Dropbox/Org/projects.org"
+  (setq org-agenda-files `(,org-inbox-file
+                           ,org-projects-file
                            "~/Dropbox/Org/tickler.org"))
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-outline-path-complete-in-steps nil)
@@ -361,9 +357,9 @@ Easy
   (setq org-refile-allow-creating-parent-nodes 'confirm)
 
   ;; Set org-capture templates
-  (setq org-capture-templates '(("t" "Todo [inbox]" entry (file "~/Dropbox/Org/inbox.org") "* TODO %i%?")
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry (file org-inbox-file) "* TODO %i%?")
                                 ("T" "Tickler" entry (file+headline "~/Dropbox/Org/tickler.org" "Tickler") "* %i%? \n %U")
-                                ("n" "Note" entry (file+headline "~/Dropbox/Org/inbox.org" "Notes") "* NOTE %?\n%U" :empty-lines 1))))
+                                ("n" "Note" entry (file+headline org-inbox-file "Notes") "* NOTE %?\n%U" :empty-lines 1))))
 
 (use-package org-download
   :ensure t)
