@@ -62,7 +62,7 @@ Basic configuration to make Emacs default behavior better.
   (require 'ls-lisp)
   (setq-default ls-lisp-use-insert-directory-program nil)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (add-to-list 'default-frame-alist '(ns-appearance . light))
   (setq-default mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
@@ -215,6 +215,13 @@ Some helpful package to deal with term mode in Emacs.
 
 (use-package all-the-icons
   :commands (all-the-icons-install-fonts))
+
+(use-package auto-dim-other-buffers
+  :ensure t
+  :config
+  (add-hook 'after-init-hook (lambda ()
+    (when (fboundp 'auto-dim-other-buffers-mode)
+      (auto-dim-other-buffers-mode t)))))
 #+END_SRC
 
 ** Color Theme
@@ -223,7 +230,7 @@ Some helpful package to deal with term mode in Emacs.
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-one t))
+  (load-theme 'doom-one-light t))
 #+END_SRC
 
 ** Doom Modeline
