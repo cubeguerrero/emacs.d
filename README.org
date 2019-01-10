@@ -246,9 +246,9 @@ Awesome initial screen
   :ensure t
   :config
   (setq dashboard-startup-banner 'logo)
-  (setq dashboard-items '((recents  . 10)
-                        (projects . 5)
-                        (agenda . 5)))
+  (setq dashboard-items '((agenda  . 10)
+                        (projects . 10)
+                        (recents . 5)))
   (dashboard-setup-startup-hook))
 #+END_SRC
 
@@ -441,6 +441,13 @@ Easy
   :ensure
   :mode (("\\.yml\\'" . yaml-mode))
   :diminish (yaml-mode))
+#+END_SRC
+
+** Slim Templating
+#+BEGIN_SRC emacs-lisp
+(use-package slim-mode
+  :mode ("\\.slim\\'" . slim-mode)
+  :diminish (slim-mode))
 #+END_SRC
 
 ** Javascript
