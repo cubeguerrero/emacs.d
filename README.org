@@ -201,8 +201,8 @@ Some helpful package to deal with term mode in Emacs.
 * User Interface
 ** Fonts
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default t :font "Fira Code 14")
-(set-face-font 'default "Fira Code-14")
+(set-face-attribute 'default t :font "Fira Code 13")
+(set-face-font 'default "Fira Code-13")
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
@@ -220,7 +220,7 @@ Some helpful package to deal with term mode in Emacs.
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-one t))
+  (load-theme 'doom-one-light t))
 #+END_SRC
 
 ** Doom Modeline
@@ -242,7 +242,7 @@ Awesome initial screen
 (use-package dashboard
   :ensure t
   :config
-  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-startup-banner 4)
   (setq dashboard-items '((agenda  . 10)
                         (projects . 10)
                         (recents . 5)))
