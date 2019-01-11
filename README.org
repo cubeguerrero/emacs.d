@@ -62,7 +62,7 @@ Basic configuration to make Emacs default behavior better.
   (require 'ls-lisp)
   (setq-default ls-lisp-use-insert-directory-program nil)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . light))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (setq-default mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
@@ -201,29 +201,26 @@ Some helpful package to deal with term mode in Emacs.
 * User Interface
 ** Fonts
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default t :font "IBM Plex Mono 14")
-(set-face-font 'default "IBM Plex Mono-14")
+(set-face-attribute 'default t :font "Fira Code 14")
+(set-face-font 'default "Fira Code-14")
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
 
 (use-package all-the-icons
   :commands (all-the-icons-install-fonts))
-
-(use-package auto-dim-other-buffers
-  :ensure t
-  :config
-  (add-hook 'after-init-hook (lambda ()
-    (when (fboundp 'auto-dim-other-buffers-mode)
-      (auto-dim-other-buffers-mode t)))))
 #+END_SRC
 
 ** Color Theme
 #+BEGIN_SRC emacs-lisp
 (use-package color-theme-sanityinc-tomorrow
+  :ensure t)
+
+(use-package doom-themes
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-day t))
+  (doom-themes-org-config)
+  (load-theme 'doom-one t))
 #+END_SRC
 
 ** Doom Modeline
@@ -534,7 +531,6 @@ Easy
   :mode (("\\.erb\\'" . web-mode)
          ("\\.html?\\'" . web-mode)
          ("\\.djhtml\\'" . web-mode)
-         ("\\.eex\\'" . web-mode)
          ("\\.jsx\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
   :config
