@@ -35,41 +35,42 @@ Setup ~package~ and ~use-package~
 * Defaults
 Basic configuration to make Emacs default behavior better.
 #+BEGIN_SRC emacs-lisp
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-(fset 'yes-or-no-p 'y-or-n-p)
+  (set-language-environment "UTF-8")
+  (set-default-coding-systems 'utf-8)
+  (fset 'yes-or-no-p 'y-or-n-p)
 
-(delete-selection-mode t)
-(global-auto-revert-mode t)
-(show-paren-mode 1)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+  (delete-selection-mode t)
+  (global-auto-revert-mode t)
+  (show-paren-mode 1)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
 
-(setq-default show-paren-delay 0)
-(setq-default indent-tabs-mode nil)
-(setq-default major-mode #'text-mode)
-(setq ring-bell-function 'ignore
-      make-backup-files nil
-      auto-save-default nil
-      delete-old-versions -1            ; delete excess backup versions silently
-      version-control t                 ; use version control
-      vc-make-backup-files t            ; make backups file even when in version controlled dir
-      vc-follow-symlinks t              ; don't ask for confirmation when opening symlinked file
-      sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
+  (setq-default show-paren-delay 0)
+  (setq-default indent-tabs-mode nil)
+  (setq-default major-mode #'text-mode)
+  (setq ring-bell-function 'ignore
+        make-backup-files nil
+        auto-save-default nil
+        delete-old-versions -1            ; delete excess backup versions silently
+        version-control t                 ; use version control
+        vc-make-backup-files t            ; make backups file even when in version controlled dir
+        vc-follow-symlinks t              ; don't ask for confirmation when opening symlinked file
+        sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
 
-(when (eq system-type 'darwin)
-  (require 'ls-lisp)
-  (setq-default ls-lisp-use-insert-directory-program nil)
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . light))
-  (setq-default mac-option-key-is-meta nil
-      mac-command-key-is-meta t
-      mac-command-modifier 'meta
-      mac-option-modifier 'none))
+  (when (eq system-type 'darwin)
+    (require 'ls-lisp)
+    (setq-default ls-lisp-use-insert-directory-program nil)
+    ;; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    ;; (add-to-list 'default-frame-alist '(ns-appearance . light))
+    (mac-auto-operator-composition-mode)
+    (setq-default mac-option-key-is-meta nil
+        mac-command-key-is-meta t
+        mac-command-modifier 'meta
+        mac-option-modifier 'none))
 
-;; Toggle fullscreen
-(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+  ;; Toggle fullscreen
+  (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 #+END_SRC
 
 * Diminish
@@ -155,6 +156,7 @@ Some helpful package to deal with term mode in Emacs.
   :ensure t
   :if (memq window-system '(mac ns x))
   :config
+  (setq exec-path-from-shell-arguments '("-l"))
   (exec-path-from-shell-initialize))
 #+END_SRC
 
@@ -201,8 +203,8 @@ Some helpful package to deal with term mode in Emacs.
 * User Interface
 ** Fonts
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default t :font "IBM Plex Mono 13")
-(set-face-font 'default "IBM Plex Mono-13")
+(add-to-list 'default-frame-alist '(font . "Iosevka-15" ))
+(set-face-attribute 'default t :font "Iosevka-15")
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
@@ -496,7 +498,10 @@ Easy
 #+BEGIN_SRC emacs-lisp
 (use-package elixir-mode
   :diminish (elixir-mode)
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'elixir-mode-hook
+          (lambda () (add-hook 'before-save-hook 'elixir-format nil t))))
 
 (use-package alchemist
   :diminish (alchemist-mode)
