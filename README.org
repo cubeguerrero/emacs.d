@@ -321,6 +321,14 @@ Easy
   :bind ("C-=" . er/expand-region))
 #+END_SRC
 
+** Comment Dwim 2
+#+BEGIN_SRC emacs-lisp
+(use-package comment-dwim-2
+  :ensure t
+  :commands (comment-dwim-2)
+  :bind ("M-;" . comment-dwim-2))
+#+END_SRC
+
 * Note Taking
 ** Org Mode
 #+BEGIN_SRC emacs-lisp
