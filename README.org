@@ -63,7 +63,9 @@ Basic configuration to make Emacs default behavior better.
     (setq-default ls-lisp-use-insert-directory-program nil)
     ;; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     ;; (add-to-list 'default-frame-alist '(ns-appearance . light))
-    (mac-auto-operator-composition-mode)
+    (if (bound-and-true-p mac-auto-operator-composition-mode)
+        (message "mac-auto-operator-composition-mode ON")
+      (message "mac-auto-operator-composition-mode OFF"))
     (setq-default mac-option-key-is-meta nil
         mac-command-key-is-meta t
         mac-command-modifier 'meta
@@ -286,7 +288,7 @@ Easy
   :ensure t
   :commands (magit-status projectile-vc)
   :bind (("C-x g s" . magit-status)
-         ("C-x g b" . magit-blame))
+         ("C-x g b" . magit-blame-addition))
   :config
   (add-to-list 'magit-log-arguments "--no-abbrev-commit")
   (setq magit-popup-use-prefix-argument 'default
