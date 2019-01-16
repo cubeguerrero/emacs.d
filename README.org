@@ -225,7 +225,7 @@ Some helpful package to deal with term mode in Emacs.
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-dracula t))
+  (load-theme 'doom-one t))
 #+END_SRC
 
 ** Doom Modeline
@@ -544,7 +544,8 @@ Easy
 (use-package web-mode
   :diminish (web-mode)
   :ensure t
-  :mode (("\\.erb\\'" . web-mode)
+  :mode (("\\.eex\\'" . web-mode)
+         ("\\.erb\\'" . web-mode)
          ("\\.html?\\'" . web-mode)
          ("\\.djhtml\\'" . web-mode)
          ("\\.jsx\\'" . web-mode)
