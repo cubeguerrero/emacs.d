@@ -9,9 +9,6 @@
 
 (org-babel-load-file "~/.emacs.d/README.org")
 
-(if (file-exists-p "~/.emacs.d/configuration.local.org")
-    (org-babel-load-file "~/.emacs.d/configuration.local.org"))
-
 ;; Set personal information
 (setq user-full-name "Cuthbert Allan Y. Guerrero"
       user-mail-address "cuthbert.guerrero@gmail.com")
