@@ -225,7 +225,7 @@ Some helpful package to deal with term mode in Emacs.
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-one t))
+  (load-theme 'doom-one-light t))
 #+END_SRC
 
 ** Doom Modeline
