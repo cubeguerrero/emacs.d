@@ -130,6 +130,9 @@ Ido replacement
 
 * Projectile
 #+BEGIN_SRC emacs-lisp
+(use-package ag
+  :ensure t)
+
 (use-package projectile
   :diminish (projectile-mode)
   :ensure t
