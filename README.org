@@ -225,7 +225,7 @@ Some helpful package to deal with term mode in Emacs.
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-dracula t))
+  (load-theme 'doom-opera-light t))
 #+END_SRC
 
 ** Doom Modeline
@@ -417,6 +417,13 @@ Easy
   :config
   (setq company-tooltip-align-annotations t)
   (add-hook 'after-init-hook 'global-company-mode))
+
+(eval-after-load 'company
+  '(progn
+     (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+     (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
+     (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
+     (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
 #+END_SRC
 
 ** Ruby
@@ -535,6 +542,11 @@ Easy
          ("\\.hsc\\'" . haskell-mode)
          ("\\.cpphs\\'" . haskell-mode)
          ("\\.c2hs\\'" . haskell-mode)))
+
+(use-package company-ghc
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-ghc))
 #+END_SRC
 
 ** Python
