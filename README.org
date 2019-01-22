@@ -602,7 +602,7 @@ Easy
 
 (use-package racer
   :ensure t
-  :diminish (racer-mode-hook)
+  :diminish (racer-mode)
   :config
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
