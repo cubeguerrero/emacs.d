@@ -75,6 +75,15 @@ Basic configuration to make Emacs default behavior better.
   (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 #+END_SRC
 
+* Whitespace
+#+BEGIN_SRC emacs-lisp
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+
+(add-hook 'prog-mode-hook 'whitespace-mode)
+#+END_SRC
+
 * Diminish
 Diminish minor modes to remove noise from the modeline
 #+BEGIN_SRC emacs-lisp
