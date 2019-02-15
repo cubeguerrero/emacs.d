@@ -3,30 +3,42 @@
 ;;; Commentary: Setup term
 ;;; Code:
 
-(defun cube/shell-pop ()
+;; Open multi-term consider projectile root
+(defun cube/multi-term ()
   "Opens up a new terminal in the directory associated with the current buffer's file."
   (interactive)
-  (if (boundp 'projectile-project-p)
-      (if (projectile-project-p)
-          (projectile-with-default-dir (projectile-project-root) (shell-pop))
-        (shell-pop))
-    (message "Hi Cube")
-    (shell-pop)))
+  (if (projectile-project-p)
+      (projectile-with-default-dir (projectile-project-root) (multi-term))
+    (multi-term)))
 
-(defun cube/test-function ()
-  "Test function"
+;; Vertical split multi-term
+(defun cube/multi-term-vertical ()
+  "Opens up a new terminal in the directory associated with the current buffer's file."
   (interactive)
-  (message "Hi Cube")
-  (shell-pop t))
+  (split-window-right)
+  (other-window 1)
+  (if (projectile-project-p)
+      (projectile-with-default-dir (projectile-project-root) (multi-term))
+    (multi-term)))
 
-(use-package shell-pop
-  :bind (("C-c t" . cube/test-function))
+;; Horizontal split multi-term
+(defun cube/multi-term-horizontal ()
+  "Opens up a new terminal in the directory associated with the current buffer's file."
+  (interactive)
+  (split-window-below)
+  (other-window 1)
+  (if (projectile-project-p)
+      (projectile-with-default-dir (projectile-project-root) (multi-term))
+    (multi-term)))
+
+(use-package multi-term
+  :ensure t
+  :commands (multi-term)
+  :bind (("C-c t v" . cube/multi-term-vertical)
+         ("C-c t h" . cube/multi-term-horizontal)
+         ("C-c t t" . cube/multi-term))
   :config
-  (setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
-  (setq shell-pop-term-shell "/usr/local/bin/zsh")
-  (setq shell-pop-window-position "top")
-  ;; need to do this manually or not picked up by `shell-pop'
-  (shell-pop--set-shell-type 'shell-pop-shell-type shell-pop-shell-type))
+  (setq multi-term-program "/usr/local/bin/zsh"))
 
 (provide 'term)
 ;;; term.el ends here.

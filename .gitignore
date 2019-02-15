@@ -57,5 +57,7 @@ smex-items
 # network security
 /network-security.data
 
+# projectile
+projectile-bookmarks.eld
 
 # End of https://www.gitignore.io/api/emacs
