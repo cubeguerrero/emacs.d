@@ -59,4 +59,7 @@ smex-items
 # network security
 /network-security.data
 
+# lsp-session
+.lsp-session*
+
 # End of https://www.gitignore.io/api/emacs

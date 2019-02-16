@@ -11,10 +11,6 @@
 
 (use-package company-flx)
 
-(use-package company-lsp
-  :config
-  (push 'company-lsp company-backends))
-
 (eval-after-load 'company
   '(progn
      (company-flx-mode +1)

@@ -1,12 +1,16 @@
 ;;; package --- Summary
-;;; Commentary: Add lsp-mode
+;;; Commentary:
+;;; Add lsp-mode
 ;;; Code:
 
 (use-package lsp-mode
   :diminish (lsp-mode)
-  :commands lsp
   :config
   (add-hook 'prog-mode-hook #'lsp))
 
+(use-package company-lsp
+  :config
+  (push 'company-lsp company-backends))
+
 (provide 'lsp)
-;;; lsp.el ends here.
+;;; lsp.el ends here
