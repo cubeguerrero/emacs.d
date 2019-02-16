@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Anonymous Pro-15" ))
-(when (member "Anonymous Pro" (font-family-list))
-  (set-frame-font "Anonymous Pro-15" t t))
+(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-15" ))
+(when (member "IBM Plex Mono" (font-family-list))
+  (set-frame-font "IBM Plex Mono-15" t t))
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
