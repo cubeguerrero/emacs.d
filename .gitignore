@@ -44,6 +44,8 @@ flycheck_*.el
 
 # projectiles files
 .projectile
+projectile-bookmarks.eld
+projectile.cache
 
 # ido
 ido.last
@@ -56,8 +58,5 @@ smex-items
 
 # network security
 /network-security.data
-
-# projectile
-projectile-bookmarks.eld
 
 # End of https://www.gitignore.io/api/emacs

@@ -1,4 +1,6 @@
-
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 
 (load "~/.emacs.d/modules/initialize.el")
 (load "~/.emacs.d/modules/osx.el")
@@ -9,7 +11,12 @@
 (load "~/.emacs.d/modules/ido.el")
 (load "~/.emacs.d/modules/term.el")
 (load "~/.emacs.d/modules/projectile.el")
+(load "~/.emacs.d/modules/lsp.el")
+(load "~/.emacs.d/modules/flycheck.el")
+(load "~/.emacs.d/modules/company.el")
 
+(load "~/.emacs.d/modules/ruby.el")
+(load "~/.emacs.d/modules/rust.el")
 
 ;; Set personal information
 (setq user-full-name "Cuthbert Allan Y. Guerrero"
@@ -20,3 +27,4 @@
 ;; customize-mode will be written in custom.el
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+;;; init.el ends here
