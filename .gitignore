@@ -62,4 +62,7 @@ smex-items
 # lsp-session
 .lsp-session*
 
+# transient
+transient/
+
 # End of https://www.gitignore.io/api/emacs

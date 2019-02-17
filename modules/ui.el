@@ -3,6 +3,9 @@
 ;;; Code:
 
 (add-to-list 'default-frame-alist '(font . "IBM Plex Mono-15" ))
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . light))
+
 (when (member "IBM Plex Mono" (font-family-list))
   (set-frame-font "IBM Plex Mono-15" t t))
 (set-face-attribute 'fringe nil
@@ -10,12 +13,13 @@
                   :background (face-background 'default))
 
 (use-package doom-themes
+  :ensure t
   :config
   (doom-themes-org-config)
   (load-theme 'doom-tomorrow-day t))
 
 (use-package doom-modeline
-  :defer t
+  :ensure t
   :hook (after-init . doom-modeline-init)
   :config
   (setq doom-modeline-icon t))

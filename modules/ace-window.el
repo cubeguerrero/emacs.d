@@ -2,7 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 (use-package ace-window
-  :bind (("C-x o" . ace-window))
+  :ensure t
+  :bind (("C-x o" . ace-window)
+         ("C-x k" . ace-delete-window))
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (custom-set-faces

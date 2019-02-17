@@ -3,6 +3,7 @@
 ;;; Elixir
 ;;; Code:
 (use-package elixir-mode
+  :ensure t
   :diminish (elixir-mode)
   :config
   (add-hook 'elixir-mode-hook

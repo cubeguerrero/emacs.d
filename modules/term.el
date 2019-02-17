@@ -1,6 +1,6 @@
-
 ;;; package --- Summary
-;;; Commentary: Setup term
+;;; Commentary:
+;;; Setup term
 ;;; Code:
 
 ;; Open multi-term consider projectile root
@@ -41,4 +41,4 @@
   (setq multi-term-program "/usr/local/bin/zsh"))
 
 (provide 'term)
-;;; term.el ends here.
+;;; term.el ends here

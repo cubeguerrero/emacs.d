@@ -11,7 +11,6 @@
 (load "~/.emacs.d/modules/ido.el")
 (load "~/.emacs.d/modules/term.el")
 (load "~/.emacs.d/modules/projectile.el")
-(load "~/.emacs.d/modules/magit.el")
 (load "~/.emacs.d/modules/ace-window.el")
 (load "~/.emacs.d/modules/flycheck.el")
 (load "~/.emacs.d/modules/company.el")
@@ -20,6 +19,7 @@
 (load "~/.emacs.d/modules/elixir.el")
 (load "~/.emacs.d/modules/ruby.el")
 (load "~/.emacs.d/modules/rust.el")
+(load "~/.emacs.d/modules/web-mode.el")
 
 ;; Set personal information
 (setq user-full-name "Cuthbert Allan Y. Guerrero"

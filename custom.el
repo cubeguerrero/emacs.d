@@ -9,7 +9,7 @@
  '(flx-ido-mode t)
  '(package-selected-packages
    (quote
-    (smex flx-ido flx doom-modeline doom-themes use-package))))
+    (magit smex flx-ido flx doom-modeline doom-themes use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

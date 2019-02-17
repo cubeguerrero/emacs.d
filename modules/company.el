@@ -4,12 +4,14 @@
 ;;; Code:
 
 (use-package company
+  :ensure t
   :diminish (company-mode)
   :config
   (setq company-tooltip-align-annotations t)
   (add-hook 'after-init-hook 'global-company-mode))
 
-(use-package company-flx)
+(use-package company-flx
+  :ensure t)
 
 (eval-after-load 'company
   '(progn

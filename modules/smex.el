@@ -1,8 +1,10 @@
 ;;; package --- Summary
-;;; Code: Install SMEX
+;;; Commentary:
+;;; Install SMEX
 ;;; Code:
 
 (use-package smex
+  :ensure t
   :init (smex-initialize)
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands)

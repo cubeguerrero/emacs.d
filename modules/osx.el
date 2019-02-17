@@ -11,8 +11,9 @@
               mac-option-modifier 'none)
 
 (use-package exec-path-from-shell
+  :ensure t
   :config
   (exec-path-from-shell-initialize))
 
 (provide 'osx)
-;;; osx.el ends here.
+;;; osx.el ends here

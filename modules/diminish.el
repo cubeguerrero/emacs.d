@@ -1,7 +1,9 @@
 ;;; package --- Summary
-;;; Commentary: Add diminish
+;;; Commentary:
+;;; Add diminish
 ;;; Code:
-(use-package diminish)
+(use-package diminish
+  :ensure t)
 
 (diminish 'auto-revert-mode)
 (diminish 'visual-line-mode)
@@ -9,4 +11,4 @@
 (diminish 'abbrev-mode)
 
 (provide 'diminish)
-;;; diminish.el ends here.
+;;; diminish.el ends here
