@@ -4,7 +4,7 @@
 
 (add-to-list 'default-frame-alist '(font . "IBM Plex Mono-15" ))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . light))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 (when (member "IBM Plex Mono" (font-family-list))
   (set-frame-font "IBM Plex Mono-15" t t))
@@ -16,7 +16,7 @@
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-tomorrow-day t))
+  (load-theme 'doom-peacock t))
 
 (use-package doom-modeline
   :ensure t
