@@ -16,7 +16,7 @@
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-peacock t))
+  (load-theme 'doom-one-light t))
 
 (use-package doom-modeline
   :ensure t
