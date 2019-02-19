@@ -10,6 +10,8 @@
 (load "~/.emacs.d/modules/smex.el")
 (load "~/.emacs.d/modules/ido.el")
 (load "~/.emacs.d/modules/term.el")
+(load "~/.emacs.d/modules/magit")
+(load "~/.emacs.d/modules/ag.el")
 (load "~/.emacs.d/modules/projectile.el")
 (load "~/.emacs.d/modules/ace-window.el")
 (load "~/.emacs.d/modules/flycheck.el")
@@ -17,9 +19,13 @@
 (load "~/.emacs.d/modules/lsp.el")
 
 (load "~/.emacs.d/modules/elixir.el")
+(load "~/.emacs.d/modules/javascript.el")
 (load "~/.emacs.d/modules/ruby.el")
 (load "~/.emacs.d/modules/rust.el")
 (load "~/.emacs.d/modules/web-mode.el")
+
+;; Utilility packages
+(load "~/.emacs.d/modules/utils/pomodoro.el")
 
 ;; Set personal information
 (setq user-full-name "Cuthbert Allan Y. Guerrero"
