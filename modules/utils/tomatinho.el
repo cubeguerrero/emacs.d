@@ -2,8 +2,8 @@
 ;;; Commentary:
 ;;; Code
 
-(use-package pomodoro
+(use-package tomatinho
   :ensure t)
 
-(provide 'utils-pomodoro)
+(provide 'utils-tomatinho)
 ;;; pomodoro.el ends here
