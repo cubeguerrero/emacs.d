@@ -12,11 +12,18 @@
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
 
+(use-package dashboard
+  :ensure t
+  :config
+  (setq dashboard-items '((projects . 5)
+                        (agenda . 5)))
+  (dashboard-setup-startup-hook))
+
 (use-package doom-themes
   :ensure t
   :config
   (doom-themes-org-config)
-  (load-theme 'doom-solarized-light t))
+  (load-theme 'doom-one-light t))
 
 (use-package doom-modeline
   :ensure t

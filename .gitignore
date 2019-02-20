@@ -65,4 +65,7 @@ smex-items
 # transient
 transient/
 
+# emacs dashboard
+recentf
+
 # End of https://www.gitignore.io/api/emacs
