@@ -25,7 +25,7 @@
 (load "~/.emacs.d/modules/web-mode.el")
 
 ;; Utilility packages
-(load "~/.emacs.d/modules/utils/pomodoro.el")
+(load "~/.emacs.d/modules/utils/tomatinho.el")
 
 ;; Set personal information
 (setq user-full-name "Cuthbert Allan Y. Guerrero"
