@@ -3,8 +3,6 @@
 ;;; Code:
 
 (add-to-list 'default-frame-alist '(font . "IBM Plex Mono-15" ))
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . light))
 
 (when (member "IBM Plex Mono" (font-family-list))
   (set-frame-font "IBM Plex Mono-15" t t))
@@ -19,11 +17,10 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package doom-themes
+(use-package apropospriate-theme
   :ensure t
   :config
-  (doom-themes-org-config)
-  (load-theme 'doom-one-light t))
+  (load-theme 'apropospriate-light t))
 
 (use-package doom-modeline
   :ensure t
