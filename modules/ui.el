@@ -17,10 +17,10 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package apropospriate-theme
+(use-package tao-theme
   :ensure t
   :config
-  (load-theme 'apropospriate-light t))
+  (load-theme 'tao-yang t))
 
 (use-package doom-modeline
   :ensure t
