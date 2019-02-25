@@ -11,5 +11,12 @@
 (use-package json-mode
   :ensure t)
 
+(use-package company-tern
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-tern)
+  (add-hook 'js2-mode-hook (lambda ()
+                             (tern-mode))))
+
 (provide 'javascript)
 ;;; javascript.el ends here
