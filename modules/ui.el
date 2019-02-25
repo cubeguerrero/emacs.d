@@ -2,10 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-15" ))
+(add-to-list 'default-frame-alist '(font . "Fira Code-15" ))
 
-(when (member "IBM Plex Mono" (font-family-list))
-  (set-frame-font "IBM Plex Mono-15" t t))
+(when (member "Fira Code" (font-family-list))
+  (set-frame-font "Fira Code-15" t t)
+  (mac-auto-operator-composition-mode))
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
@@ -17,10 +18,10 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package tao-theme
+(use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
-  (load-theme 'tao-yang t))
+  (load-theme 'sanityinc-tomorrow-day t))
 
 (use-package doom-modeline
   :ensure t
