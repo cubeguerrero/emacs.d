@@ -36,4 +36,4 @@
   :commands (all-the-icons-install-fonts))
 
 (provide 'ui)
-;;; ui.el ends here.
+;;; ui.el ends here
