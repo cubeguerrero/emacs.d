@@ -2,11 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Fira Code-15" ))
+(add-to-list 'default-frame-alist '(font . "Input Mono-14"))
 
-(when (member "Fira Code" (font-family-list))
-  (set-frame-font "Fira Code-15" t t)
+(when (member "Input Mono" (font-family-list))
+  (set-frame-font "Input Mono-14" t t)
   (mac-auto-operator-composition-mode))
+
 (set-face-attribute 'fringe nil
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
@@ -18,10 +19,12 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package color-theme-sanityinc-tomorrow
+(use-package leuven-theme
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-day t))
+  (setq leuven-scale-outline-headlines nil)
+  (setq leuven-scale-org-agenda-structure nil)
+  (load-theme 'leuven t))
 
 (use-package doom-modeline
   :ensure t
