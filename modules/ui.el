@@ -15,7 +15,7 @@
 (use-package dashboard
   :ensure t
   :config
-  (setq dashboard-items '((projects . 5)
+  (setq dashboard-items '((projects . 10)
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
