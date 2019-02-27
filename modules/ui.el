@@ -2,10 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Input Mono-14"))
+(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-13"))
 
-(when (member "Input Mono" (font-family-list))
-  (set-frame-font "Input Mono-14" t t)
+(when (member "IBM Plex Mono" (font-family-list))
+  (set-frame-font "IBM Plex Mono-13" t t)
   (mac-auto-operator-composition-mode))
 
 (set-face-attribute 'fringe nil
