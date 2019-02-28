@@ -19,12 +19,12 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package leuven-theme
+(use-package doom-themes
   :ensure t
   :config
-  (setq leuven-scale-outline-headlines nil)
-  (setq leuven-scale-org-agenda-structure nil)
-  (load-theme 'leuven t))
+  (doom-themes-visual-bell-config)
+  (doom-themes-org-config)
+  (load-theme 'doom-peacock t))
 
 (use-package doom-modeline
   :ensure t
