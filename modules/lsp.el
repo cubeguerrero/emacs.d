@@ -14,5 +14,10 @@
   :config
   (push 'company-lsp company-backends))
 
+(use-package lsp-ui
+  :ensure t
+  :config
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
 (provide 'lsp)
 ;;; lsp.el ends here
