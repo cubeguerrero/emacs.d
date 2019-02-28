@@ -12,6 +12,8 @@
                   :foreground (face-foreground 'default)
                   :background (face-background 'default))
 
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
 (use-package dashboard
   :ensure t
   :config
@@ -24,7 +26,7 @@
   :config
   (doom-themes-visual-bell-config)
   (doom-themes-org-config)
-  (load-theme 'doom-peacock t))
+  (load-theme 'doom-one-light t))
 
 (use-package doom-modeline
   :ensure t
