@@ -21,12 +21,10 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package doom-themes
+(use-package apropospriate-theme
   :ensure t
   :config
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config)
-  (load-theme 'doom-one-light t))
+  (load-theme 'apropospriate-light t))
 
 (use-package doom-modeline
   :ensure t
