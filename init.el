@@ -24,6 +24,8 @@
 (load "~/.emacs.d/modules/rust.el")
 (load "~/.emacs.d/modules/web-mode.el")
 
+(load "~/.emacs.d/modules/org.el")
+
 ;; Utilility packages
 (load "~/.emacs.d/modules/utils/tomatinho.el")
 
