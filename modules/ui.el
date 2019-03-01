@@ -26,7 +26,7 @@
   :config
   (doom-themes-visual-bell-config)
   (doom-themes-org-config)
-  (load-theme 'doom-one-light t))
+  (load-theme 'doom-tomorrow-night t))
 
 (use-package doom-modeline
   :ensure t
