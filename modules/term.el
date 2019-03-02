@@ -40,5 +40,10 @@
   :config
   (setq multi-term-program "/usr/local/bin/zsh"))
 
+(use-package eterm-256color
+  :ensure t
+  :config
+  (add-hook 'term-mode-hook #'eterm-256color-mode))
+
 (provide 'term)
 ;;; term.el ends here
