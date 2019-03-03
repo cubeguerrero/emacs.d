@@ -8,6 +8,10 @@
   :diminish (company-mode)
   :config
   (setq company-tooltip-align-annotations t)
+  (setq company-selection-wrap-around t)
+  (define-key company-active-map [tab] 'company-complete)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
   (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package company-flx
