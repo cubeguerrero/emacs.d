@@ -6,6 +6,7 @@
 (load "~/.emacs.d/modules/osx.el")
 (load "~/.emacs.d/modules/defaults.el")
 (load "~/.emacs.d/modules/diminish.el")
+(load "~/.emacs.d/modules/evil.el")
 (load "~/.emacs.d/modules/ui.el")
 (load "~/.emacs.d/modules/smex.el")
 (load "~/.emacs.d/modules/ido.el")
