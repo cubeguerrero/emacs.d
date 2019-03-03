@@ -21,10 +21,10 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package zenburn-theme
+(use-package eink-theme
   :ensure t
   :config
-  (load-theme 'zenburn t))
+  (load-theme 'eink t))
 
 (use-package doom-modeline
   :ensure t
