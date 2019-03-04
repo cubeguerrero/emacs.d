@@ -21,10 +21,10 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package eink-theme
+(use-package kaolin-themes
   :ensure t
   :config
-  (load-theme 'eink t))
+  (load-theme 'kaolin-light t))
 
 (use-package doom-modeline
   :ensure t
