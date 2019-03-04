@@ -36,7 +36,9 @@
   ;; Set org-capture templates
   (setq org-capture-templates '(("t" "Todo [inbox]" entry (file org-inbox-file) "* TODO %i%?")
                                 ("T" "Tickler" entry (file+headline "~/Dropbox/Org/tickler.org" "Tickler") "* %i%? \n %U")
-                                ("n" "Note" entry (file org-notes-file) "* NOTE %?\n%U" :empty-lines 1))))
+                                ("n" "Note" entry (file org-notes-file) "* NOTE %?\n%U" :empty-lines 1)))
+  (add-hook 'org-mode-hook (lambda ()
+                             (visual-line-mode +1))))
 
 (use-package org-download
   :ensure t)

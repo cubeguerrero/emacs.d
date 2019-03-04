@@ -71,4 +71,7 @@ recentf
 # custom.el
 custom.el
 
+# bookmarks
+bookmarks
+
 # End of https://www.gitignore.io/api/emacs

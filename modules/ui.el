@@ -21,10 +21,12 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package kaolin-themes
+(use-package doom-themes
   :ensure t
   :config
-  (load-theme 'kaolin-light t))
+  (doom-themes-visual-bell-config)
+  (doom-themes-org-config)
+  (load-theme 'doom-one-light t))
 
 (use-package doom-modeline
   :ensure t
