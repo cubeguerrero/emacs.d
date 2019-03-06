@@ -23,6 +23,7 @@
 (load "~/.emacs.d/modules/ruby.el")
 (load "~/.emacs.d/modules/rust.el")
 (load "~/.emacs.d/modules/web-mode.el")
+(load "~/.emacs.d/modules/yaml.el")
 
 (load "~/.emacs.d/modules/org.el")
 
