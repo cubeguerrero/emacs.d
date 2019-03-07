@@ -32,7 +32,10 @@
   :ensure t
   :hook (after-init . doom-modeline-init)
   :config
-  (setq doom-modeline-icon t))
+  (setq doom-modeline-icon t
+        doom-modeline-major-mode-icon t
+        doom-modeline-height 25
+        doom-modeline-bar-width 2))
 
 (use-package all-the-icons
   :commands (all-the-icons-install-fonts))
