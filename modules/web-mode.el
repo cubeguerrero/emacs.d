@@ -9,8 +9,7 @@
          ("\\.html?\\'" . web-mode)
          ("\\.djhtml\\'" . web-mode)
          ("\\.jsx\\'" . web-mode)
-         ("\\.hdbs\\'" . web-mode)
-         ("\\.vue\\'" . web-mode)))
+         ("\\.hdbs\\'" . web-mode)))
 
 (provide 'web-mode)
 ;;; web-mode.el ends here

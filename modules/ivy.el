@@ -18,7 +18,8 @@
 
 (use-package swiper
   :ensure t
-  :bind (("\C-s" . swiper)))
+  :bind (("\C-s" . swiper)
+         ("\C-r" . swiper)))
 
 (provide 'ivy)
 ;;; ivy.el ends here

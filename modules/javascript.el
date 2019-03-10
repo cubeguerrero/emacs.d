@@ -11,12 +11,11 @@
 (use-package json-mode
   :ensure t)
 
-(use-package company-tern
+(use-package vue-mode
   :ensure t
+  :mode (("\\.vue\\'" . vue-mode))
   :config
-  (add-to-list 'company-backends 'company-tern)
-  (add-hook 'js2-mode-hook (lambda ()
-                             (tern-mode))))
+  (setq js-indent-level 2))
 
 (provide 'javascript)
 ;;; javascript.el ends here

@@ -16,6 +16,7 @@
 
 (load "~/.emacs.d/modules/flycheck.el")
 (load "~/.emacs.d/modules/company.el")
+(load "~/.emacs.d/modules/lsp.el")
 
 (load "~/.emacs.d/modules/elixir.el")
 (load "~/.emacs.d/modules/javascript.el")
