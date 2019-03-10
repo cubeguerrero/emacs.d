@@ -11,11 +11,5 @@
 (use-package json-mode
   :ensure t)
 
-(use-package vue-mode
-  :ensure t
-  :mode (("\\.vue\\'" . vue-mode))
-  :config
-  (setq js-indent-level 2))
-
 (provide 'javascript)
 ;;; javascript.el ends here
