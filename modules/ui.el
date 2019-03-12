@@ -2,10 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-14"))
+(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-15"))
 
 (when (member "IBM Plex Mono" (font-family-list))
-  (set-frame-font "IBM Plex Mono-14" t t)
+  (set-frame-font "IBM Plex Mono-15" t t)
   (mac-auto-operator-composition-mode))
 
 (set-face-attribute 'fringe nil
@@ -26,7 +26,7 @@
   :config
   (doom-themes-visual-bell-config)
   (doom-themes-org-config)
-  (load-theme 'doom-dracula t))
+  (load-theme 'doom-one-light t))
 
 (use-package doom-modeline
   :ensure t
