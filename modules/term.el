@@ -3,6 +3,7 @@
 ;;; Setup term
 ;;; Code:
 
+(setq term-buffer-maximum-size 10000)
 ;; Open multi-term consider projectile root
 (defun cube/multi-term ()
   "Opens up a new terminal in the directory associated with the current buffer's file."
