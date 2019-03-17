@@ -33,7 +33,7 @@
   (setq doom-modeline-icon t
         doom-modeline-major-mode-icon t
         doom-modeline-height 25
-        doom-modeline-bar-width 2))
+        doom-modeline-bar-width 4))
 
 (use-package all-the-icons
   :commands (all-the-icons-install-fonts))
