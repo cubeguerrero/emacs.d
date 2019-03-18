@@ -2,10 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-14"))
+(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
 
-(when (member "IBM Plex Mono" (font-family-list))
-  (set-frame-font "IBM Plex Mono-14" t t)
+(when (member "Iosevka" (font-family-list))
+  (set-frame-font "Iosevka-14" t t)
   (mac-auto-operator-composition-mode))
 
 (set-face-attribute 'fringe nil
@@ -21,12 +21,10 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package doom-themes
+(use-package leuven-theme
   :ensure t
   :config
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config)
-  (load-theme 'doom-one-light t))
+  (load-theme 'leuven t))
 
 (use-package doom-modeline
   :ensure t
@@ -35,7 +33,7 @@
   (setq doom-modeline-icon t
         doom-modeline-major-mode-icon t
         doom-modeline-height 25
-        doom-modeline-bar-width 2))
+        doom-modeline-bar-width 4))
 
 (use-package all-the-icons
   :commands (all-the-icons-install-fonts))
