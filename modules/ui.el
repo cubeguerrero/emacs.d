@@ -2,10 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
+(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-14"))
 
-(when (member "Iosevka" (font-family-list))
-  (set-frame-font "Iosevka-14" t t)
+(when (member "IBM Plex Mono" (font-family-list))
+  (set-frame-font "IBM Plex Mono-14" t t)
   (mac-auto-operator-composition-mode))
 
 (set-face-attribute 'fringe nil
@@ -21,10 +21,10 @@
                         (agenda . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package leuven-theme
+(use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
-  (load-theme 'leuven t))
+  (load-theme 'sanityinc-tomorrow-day t))
 
 (use-package doom-modeline
   :ensure t
