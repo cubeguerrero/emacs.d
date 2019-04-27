@@ -3,13 +3,11 @@
 ;;; Code:
 
 (add-to-list 'default-frame-alist '(font . "IBM Plex Mono-14"))
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . light))
 
 (when (member "IBM Plex Mono" (font-family-list))
   (set-frame-font "IBM Plex Mono-14" t t))
-
-(set-face-attribute 'fringe nil
-                  :foreground (face-foreground 'default)
-                  :background (face-background 'default))
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
