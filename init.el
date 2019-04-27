@@ -11,9 +11,6 @@
 (load "~/.emacs.d/modules/magit")
 (load "~/.emacs.d/modules/ag.el")
 (load "~/.emacs.d/modules/projectile.el")
-(load "~/.emacs.d/modules/ace-window.el")
-(load "~/.emacs.d/modules/ace-link.el")
-(load "~/.emacs.d/modules/ialign.el")
 
 (load "~/.emacs.d/modules/flycheck.el")
 (load "~/.emacs.d/modules/company.el")
