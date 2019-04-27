@@ -12,6 +12,7 @@
 (load "~/.emacs.d/modules/ag.el")
 (load "~/.emacs.d/modules/projectile.el")
 (load "~/.emacs.d/modules/comment-dwim-2.el")
+(load "~/.emacs.d/modules/term.el")
 
 (load "~/.emacs.d/modules/flycheck.el")
 (load "~/.emacs.d/modules/company.el")
