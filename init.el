@@ -8,7 +8,6 @@
 (load "~/.emacs.d/modules/diminish.el")
 (load "~/.emacs.d/modules/ui.el")
 (load "~/.emacs.d/modules/ivy.el")
-(load "~/.emacs.d/modules/term.el")
 (load "~/.emacs.d/modules/magit")
 (load "~/.emacs.d/modules/ag.el")
 (load "~/.emacs.d/modules/projectile.el")
@@ -17,11 +16,9 @@
 (load "~/.emacs.d/modules/ialign.el")
 
 (load "~/.emacs.d/modules/flycheck.el")
-(load "~/.emacs.d/modules/format-all.el")
 (load "~/.emacs.d/modules/company.el")
 (load "~/.emacs.d/modules/lsp.el")
 
-(load "~/.emacs.d/modules/elixir.el")
 (load "~/.emacs.d/modules/javascript.el")
 (load "~/.emacs.d/modules/ruby.el")
 (load "~/.emacs.d/modules/rust.el")
@@ -29,9 +26,6 @@
 (load "~/.emacs.d/modules/yaml.el")
 
 (load "~/.emacs.d/modules/org.el")
-
-;; Utilility packages
-(load "~/.emacs.d/modules/utils/tomatinho.el")
 
 ;; Set personal information
 (setq user-full-name "Cuthbert Allan Y. Guerrero"

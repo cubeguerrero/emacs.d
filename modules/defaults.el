@@ -13,6 +13,7 @@
 (delete-selection-mode 1)
 (global-auto-revert-mode 1)
 (show-paren-mode 1)
+(transient-mark-mode 1)
 
 (setq-default show-paren-delay 0
               indent-tabs-mode nil
