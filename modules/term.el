@@ -4,7 +4,9 @@
 
 (defadvice term-handle-exit
     (after term-kill-buffer-on-exit activate)
-  (kill-buffer-and-window))
+  (if (one-window-p)
+      (kill-buffer)
+    (kill-buffer-and-window)))
 
 (defun cube/open-term-at-directory (root-directory)
   "Open an `ansi-term` at ROOT-DIRECTORY."
