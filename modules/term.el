@@ -40,7 +40,7 @@
     (cube/open-term-at-directory "~/")))
 
 (global-set-key (kbd "C-c t o") 'cube/open-term)
-(global-set-key (kbd "C-c t t") 'cube/open-term-vertical)
+(global-set-key (kbd "C-c t v") 'cube/open-term-vertical)
 (global-set-key (kbd "C-c t h") 'cube/open-term-horizontal)
 
 (provide 'term)
