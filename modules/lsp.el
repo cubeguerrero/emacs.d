@@ -5,9 +5,10 @@
 
 (use-package lsp-mode
   :ensure t
+  :hook (prog-mode . lsp)
   :diminish (lsp-mode)
-  :config
-  (add-hook 'prog-mode-hook #'lsp))
+  :init
+  (setq lsp-prefer-flymake nil))
 
 (use-package company-lsp
   :ensure t
