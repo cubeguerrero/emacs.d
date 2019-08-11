@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-14"))
+(add-to-list 'default-frame-alist '(font . "Fira Mono-14"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
-(when (member "IBM Plex Mono" (font-family-list))
-  (set-frame-font "IBM Plex Mono-14" t t))
+(when (member "Fira Mono" (font-family-list))
+  (set-frame-font "Fira Mono-14" t t))
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
@@ -15,8 +15,10 @@
   :ensure t
   :config
   (setq dashboard-center-content t
-        dashboard-items '((projects . 10)
-                          (agenda . 5)))
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons 5
+        dashboard-items '((recents . 5)
+                          (projects . 5)))
   (dashboard-setup-startup-hook))
 
 (use-package doom-themes
@@ -26,6 +28,13 @@
         doom-themes-enable-italic t)
   (doom-themes-org-config)
   (load-theme 'doom-one-light t))
+
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
+  :config
+  (setq doom-modeline-icon t)
+  (setq doom-modeline-lsp t))
 
 (provide 'ui)
 ;;; ui.el ends here
