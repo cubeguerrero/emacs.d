@@ -7,7 +7,8 @@
   :bind (("C-c C-r" . ivy-resume))
   :config
   (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t
+  (setq ivy-height 20
+        ivy-use-virtual-buffers t
         ivy-count-format "%d/%d "))
 
 (use-package counsel
