@@ -2,14 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Fira Mono-14"))
+(add-to-list 'default-frame-alist '(font . "Monaco-13"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
-(when (member "Fira Mono" (font-family-list))
-  (set-frame-font "Fira Mono-14" t t))
-
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(when (member "Monaco" (font-family-list))
+  (set-frame-font "Monaco-13" t t))
 
 (use-package dashboard
   :ensure t

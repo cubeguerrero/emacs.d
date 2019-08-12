@@ -7,8 +7,9 @@
   :ensure t
   :hook (prog-mode . lsp)
   :diminish (lsp-mode)
-  :init
-  (setq lsp-prefer-flymake nil))
+  :config
+  (setq lsp-prefer-flymake nil
+        lsp-enable-snippet nil))
 
 (use-package company-lsp
   :ensure t
@@ -17,9 +18,11 @@
 
 (use-package lsp-ui
   :ensure t
+  :hook (lsp-mode . lsp-ui-mode)
   :config
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  
   (setq lsp-ui-sideline-enable nil
         lsp-ui-doc-enable nil
         lsp-ui-flycheck-enable t
