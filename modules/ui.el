@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Monaco-13"))
+(add-to-list 'default-frame-alist '(font . "Menlo-14"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
-(when (member "Monaco" (font-family-list))
-  (set-frame-font "Monaco-13" t t))
+(when (member "Menlo" (font-family-list))
+  (set-frame-font "Menlo-14" t t))
 
 (use-package dashboard
   :ensure t
