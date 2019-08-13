@@ -25,7 +25,7 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
   (doom-themes-org-config)
-  (load-theme 'doom-solarized-light t))
+  (load-theme 'doom-one-light t))
 
 (use-package doom-modeline
   :ensure t
