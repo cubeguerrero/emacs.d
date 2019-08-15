@@ -1,47 +1,50 @@
-;;; package --- Summary
-;;; Commentary:
-;;; Code:
+;;; package --- Summary	
+;;; Commentary:	
+;;; Setup term	
+;;; Code:	
 
-(defadvice term-handle-exit
-    (after term-kill-buffer-on-exit activate)
-  (if (one-window-p)
-      (kill-buffer)
-    (kill-buffer-and-window)))
+ (setq term-buffer-maximum-size 10000)	
+;; Open multi-term consider projectile root	
+(defun cube/multi-term ()	
+  "Opens up a new terminal in the directory associated with the current buffer's file."	
+  (interactive)	
+  (if (projectile-project-p)	
+      (projectile-with-default-dir (projectile-project-root) (multi-term))	
+    (multi-term)))	
 
-(defun cube/open-term-at-directory (root-directory)
-  "Open an `ansi-term` at ROOT-DIRECTORY."
-  (interactive)
-  (setq default-directory root-directory)
-  (ansi-term (getenv "SHELL")))
+ ;; Vertical split multi-term	
+(defun cube/multi-term-vertical ()	
+  "Opens up a new terminal in the directory associated with the current buffer's file."	
+  (interactive)	
+  (split-window-right)	
+  (other-window 1)	
+  (if (projectile-project-p)	
+      (projectile-with-default-dir (projectile-project-root) (multi-term))	
+    (multi-term)))	
 
-(defun cube/open-term ()
-  "Create an 'ansi-term' at the project root."
-  (interactive)
-  (if (projectile-project-p)
-      (cube/open-term-at-directory (projectile-project-root))
-    (cube/open-term-at-directory "~/")))
+ ;; Horizontal split multi-term	
+(defun cube/multi-term-horizontal ()	
+  "Opens up a new terminal in the directory associated with the current buffer's file."	
+  (interactive)	
+  (split-window-below)	
+  (other-window 1)	
+  (if (projectile-project-p)	
+      (projectile-with-default-dir (projectile-project-root) (multi-term))	
+    (multi-term)))	
 
-(defun cube/open-term-vertical ()
-  "Create an 'ansi-term' at the project root in vertical split."
-  (interactive)
-  (split-window-right)
-  (other-window 1)
-  (if (projectile-project-p)
-      (cube/open-term-at-directory (projectile-project-root))
-    (cube/open-term-at-directory "~/")))
+ (use-package multi-term	
+  :ensure t	
+  :commands (multi-term)	
+  :bind (("C-c t v" . cube/multi-term-vertical)	
+         ("C-c t h" . cube/multi-term-horizontal)	
+         ("C-c t o" . cube/multi-term))	
+  :config	
+  (setq multi-term-program "/usr/local/bin/zsh"))	
 
-(defun cube/open-term-horizontal ()
-  "Create an 'ansi-term' at the project root in horizontal split."
-  (interactive)
-  (split-window-below)
-  (other-window 1)
-  (if (projectile-project-p)
-      (cube/open-term-at-directory (projectile-project-root))
-    (cube/open-term-at-directory "~/")))
+ (use-package eterm-256color	
+  :ensure t	
+  :config	
+  (add-hook 'term-mode-hook #'eterm-256color-mode))	
 
-(global-set-key (kbd "C-c t o") 'cube/open-term)
-(global-set-key (kbd "C-c t v") 'cube/open-term-vertical)
-(global-set-key (kbd "C-c t h") 'cube/open-term-horizontal)
-
-(provide 'term)
+ (provide 'term)	
 ;;; term.el ends here
