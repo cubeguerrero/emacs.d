@@ -19,13 +19,18 @@
                           (projects . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package doom-themes
+;; (use-package doom-themes
+;;   :ensure t
+;;   :config
+;;   (setq doom-themes-enable-bold t
+;;         doom-themes-enable-italic t)
+;;   (doom-themes-org-config)
+;;   (load-theme 'doom-tomorrow-day t))
+
+(use-package minimal-theme
   :ensure t
   :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (doom-themes-org-config)
-  (load-theme 'doom-tomorrow-day t))
+  (load-theme 'minimal-light t))
 
 (use-package doom-modeline
   :ensure t
