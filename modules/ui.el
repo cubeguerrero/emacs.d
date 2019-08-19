@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Menlo-14"))
+(add-to-list 'default-frame-alist '(font . "Menlo-13"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
 (when (member "Menlo" (font-family-list))
-  (set-frame-font "Menlo-14" t t))
+  (set-frame-font "Menlo-13" t t))
 
 (use-package dashboard
   :ensure t
@@ -25,7 +25,7 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
   (doom-themes-org-config)
-  (load-theme 'doom-one-light t))
+  (load-theme 'doom-tomorrow-day t))
 
 (use-package doom-modeline
   :ensure t
