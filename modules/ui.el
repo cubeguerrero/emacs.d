@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-14"))
+(add-to-list 'default-frame-alist '(font . "SF Mono-14"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
-(when (member "IBM Plex Mono" (font-family-list))
-  (set-frame-font "IBM Plex Mono-14" t t))
+(when (member "SF Mono" (font-family-list))
+  (set-frame-font "SF Mono-14" t t))
 
 (use-package dashboard
   :ensure t
