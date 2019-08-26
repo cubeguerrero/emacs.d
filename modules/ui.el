@@ -19,10 +19,7 @@
                           (projects . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package apropospriate-theme
-  :ensure t
-  :config
-  (load-theme 'apropospriate-light t))
+(load-theme 'leuven t)
 
 (use-package doom-modeline
   :ensure t
