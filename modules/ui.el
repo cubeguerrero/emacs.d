@@ -19,14 +19,14 @@
                           (projects . 5)))
   (dashboard-setup-startup-hook))
 
-(load-theme 'leuven t)
-
 (use-package doom-modeline
   :ensure t
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-icon t)
   (setq doom-modeline-lsp t))
+
+(load-theme 'leuven t)
 
 (provide 'ui)
 ;;; ui.el ends here
