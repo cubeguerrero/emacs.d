@@ -26,7 +26,10 @@
   (setq doom-modeline-icon t)
   (setq doom-modeline-lsp t))
 
-(load-theme 'leuven t)
+(use-package apropospriate-theme
+  :ensure t
+  :config
+  (load-theme 'aprospriate-light t))
 
 (provide 'ui)
 ;;; ui.el ends here
