@@ -29,7 +29,7 @@
 (use-package apropospriate-theme
   :ensure t
   :config
-  (load-theme 'aprospriate-light t))
+  (load-theme 'apropospriate-light t))
 
 (provide 'ui)
 ;;; ui.el ends here
