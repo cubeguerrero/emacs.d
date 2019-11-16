@@ -2,12 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Menlo-14"))
+(add-to-list 'default-frame-alist '(font . "SF Mono-13"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
-(when (member "Menlo" (font-family-list))
-  (set-frame-font "Menlo-14" t t))
+(when (member "SF Mono" (font-family-list))
+  (set-frame-font "SF Mono-13" t t))
+
+(setq line-spacing 0.5)
 
 (use-package dashboard
   :ensure t
@@ -26,10 +28,7 @@
   (setq doom-modeline-icon t)
   (setq doom-modeline-lsp t))
 
-(use-package apropospriate-theme
-  :ensure t
-  :config
-  (load-theme 'apropospriate-light t))
+(load-theme 'leuven t)
 
 (provide 'ui)
 ;;; ui.el ends here
