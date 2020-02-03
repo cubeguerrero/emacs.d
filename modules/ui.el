@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "SF Mono-13"))
+(add-to-list 'default-frame-alist '(font . "Menlo-13"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
-(when (member "SF Mono" (font-family-list))
-  (set-frame-font "SF Mono-13" t t))
+(when (member "Menlo" (font-family-list))
+  (set-frame-font "Menlo" t t))
 
 (setq line-spacing 0.5)
 
@@ -28,7 +28,10 @@
   (setq doom-modeline-icon t)
   (setq doom-modeline-lsp t))
 
-(load-theme 'leuven t)
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-one-light t))
 
 (provide 'ui)
 ;;; ui.el ends here

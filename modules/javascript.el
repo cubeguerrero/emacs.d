@@ -11,5 +11,9 @@
 (use-package json-mode
   :ensure t)
 
+(use-package typescript-mode
+  :ensure t
+  :mode (("\\.ts\\'" . typescript-mode)))
+
 (provide 'javascript)
 ;;; javascript.el ends here
