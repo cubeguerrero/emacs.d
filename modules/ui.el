@@ -7,9 +7,9 @@
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
 (when (member "Menlo" (font-family-list))
-  (set-frame-font "Menlo" t t))
+  (set-frame-font "Menlo-13" t t))
 
-(setq line-spacing 0.5)
+(setq line-spacing 1)
 
 (use-package dashboard
   :ensure t
