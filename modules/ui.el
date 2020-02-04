@@ -30,10 +30,5 @@
   (setq doom-modeline-icon t)
   (setq doom-modeline-lsp t))
 
-(use-package doom-themes
-  :ensure t
-  :config
-  (load-theme 'doom-one-light t))
-
 (provide 'ui)
 ;;; ui.el ends here
