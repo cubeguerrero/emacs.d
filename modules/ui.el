@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "JetBrains Mono-13"))
+(add-to-list 'default-frame-alist '(font . "Fira Code-13"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
-(when (member "JetBrains Mono" (font-family-list))
-  (set-frame-font "JetBrains Mono-13" t t))
+(when (member "Fira Code" (font-family-list))
+  (set-frame-font "Fira Code" t t))
 
 (setq line-spacing 1)
 

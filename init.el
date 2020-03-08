@@ -18,6 +18,7 @@
 (load "~/.emacs.d/modules/company.el")
 (load "~/.emacs.d/modules/lsp.el")
 
+(load "~/.emacs.d/modules/go.el")
 (load "~/.emacs.d/modules/javascript.el")
 (load "~/.emacs.d/modules/ruby.el")
 (load "~/.emacs.d/modules/rust.el")
