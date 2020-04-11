@@ -2,12 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Fira Code-13"))
+(add-to-list 'default-frame-alist '(font . "Victor Mono-14"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
-(when (member "Fira Code" (font-family-list))
-  (set-frame-font "Fira Code" t t))
+(when (member "Victor Mono" (font-family-list))
+  (set-frame-font "Victor Mono" t t))
 
 (setq line-spacing 1)
 
@@ -23,12 +23,10 @@
                           (projects . 5)))
   (dashboard-setup-startup-hook))
 
-(use-package doom-modeline
+(use-package modus-operandi-theme
   :ensure t
-  :hook (after-init . doom-modeline-mode)
   :config
-  (setq doom-modeline-icon t)
-  (setq doom-modeline-lsp t))
+  (load-theme 'modus-operandi t))
 
 (provide 'ui)
 ;;; ui.el ends here
