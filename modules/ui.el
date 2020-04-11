@@ -11,7 +11,7 @@
 
 (setq line-spacing 1)
 
-(mac-auto-operator-composition-mode)
+; (mac-auto-operator-composition-mode)
 
 (use-package dashboard
   :ensure t
@@ -22,11 +22,6 @@
         dashboard-items '((recents . 5)
                           (projects . 5)))
   (dashboard-setup-startup-hook))
-
-(use-package modus-operandi-theme
-  :ensure t
-  :config
-  (load-theme 'modus-operandi t))
 
 (provide 'ui)
 ;;; ui.el ends here
