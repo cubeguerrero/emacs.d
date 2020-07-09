@@ -26,6 +26,7 @@
 
 (load "~/.emacs.d/modules/org.el")
 
+(server-start)
 ;; Set personal information
 (setq user-full-name "Cuthbert Allan Y. Guerrero"
       user-mail-address "cuthbert.guerrero@gmail.com")
