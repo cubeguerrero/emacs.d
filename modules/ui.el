@@ -2,26 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'default-frame-alist '(font . "Menlo-13"))
+(add-to-list 'default-frame-alist '(font . "JetBrains Mono-13"))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
 
-(when (member "Menlo" (font-family-list))
-  (set-frame-font "Menlo-13" t t))
+(when (member "JetBrains Mono" (font-family-list))
+  (set-frame-font "JetBrains Mono-13" t t))
 
 (setq line-spacing 1)
 
-; (mac-auto-operator-composition-mode)
-
-(use-package dashboard
+(use-package gruvbox-theme
   :ensure t
-  :config
-  (setq dashboard-center-content t
-        dashboard-set-heading-icons t
-        dashboard-set-file-icons 5
-        dashboard-items '((recents . 5)
-                          (projects . 5)))
-  (dashboard-setup-startup-hook))
+  :init
+  (load-theme 'gruvbox-dark-medium t))
 
 (provide 'ui)
 ;;; ui.el ends here
