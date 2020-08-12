@@ -11,10 +11,10 @@
 
 (setq line-spacing 1)
 
-(use-package gruvbox-theme
+(use-package color-theme-sanityinc-tomorrow
   :ensure t
   :init
-  (load-theme 'gruvbox-dark-medium t))
+  (load-theme 'sanityinc-tomorrow-day t))
 
 (provide 'ui)
 ;;; ui.el ends here

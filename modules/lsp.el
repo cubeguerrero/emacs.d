@@ -11,11 +11,6 @@
   (setq lsp-prefer-flymake nil
         lsp-enable-snippet nil))
 
-(use-package company-lsp
-  :ensure t
-  :config
-  (push 'company-lsp company-backends))
-
 (use-package lsp-ui
   :ensure t
   :hook (lsp-mode . lsp-ui-mode)
