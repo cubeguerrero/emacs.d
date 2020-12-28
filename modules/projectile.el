@@ -13,13 +13,7 @@
   (setq projectile-mode-line
         '(:eval (format " [%s]" (projectile-project-name))))
   (setq projectile-remember-window-configs t
-        projectile-completion-system 'ivy))
-
-(use-package counsel-projectile
-  :ensure t
-  :diminish (counsel-projectile-mode)
-  :config
-  (counsel-projectile-mode 1))
+        projectile-completion-system 'ido))
 
 (provide 'projectile)
 ;;; projectile.el ends here

@@ -7,14 +7,11 @@
 (load "~/.emacs.d/modules/defaults.el")
 (load "~/.emacs.d/modules/diminish.el")
 (load "~/.emacs.d/modules/ui.el")
-(load "~/.emacs.d/modules/ivy.el")
 (load "~/.emacs.d/modules/magit")
 (load "~/.emacs.d/modules/ag.el")
+(load "~/.emacs.d/modules/ido.el")
 (load "~/.emacs.d/modules/projectile.el")
-(load "~/.emacs.d/modules/comment-dwim-2.el")
 
-(load "~/.emacs.d/modules/flycheck.el")
-(load "~/.emacs.d/modules/company.el")
 (load "~/.emacs.d/modules/lsp.el")
 
 (load "~/.emacs.d/modules/go.el")
@@ -22,8 +19,6 @@
 (load "~/.emacs.d/modules/ruby.el")
 (load "~/.emacs.d/modules/web-mode.el")
 (load "~/.emacs.d/modules/yaml.el")
-
-(load "~/.emacs.d/modules/org.el")
 
 (server-start)
 ;; Set personal information
