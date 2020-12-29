@@ -10,6 +10,7 @@
 (load "~/.emacs.d/modules/magit")
 (load "~/.emacs.d/modules/ag.el")
 (load "~/.emacs.d/modules/ido.el")
+(load "~/.emacs.d/modules/ace-window.el")
 (load "~/.emacs.d/modules/projectile.el")
 
 (load "~/.emacs.d/modules/lsp.el")

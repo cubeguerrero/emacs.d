@@ -11,5 +11,11 @@
 
 (setq line-spacing 1)
 
+(use-package simple-modeline
+  :ensure t
+  :hook (after-init . simple-modeline-mode))
+
+(load-theme 'leuven t)
+
 (provide 'ui)
 ;;; ui.el ends here
