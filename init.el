@@ -17,6 +17,7 @@
 
 (load "~/.emacs.d/modules/go.el")
 (load "~/.emacs.d/modules/javascript.el")
+(load "~/.emacs.d/modules/python.el")
 (load "~/.emacs.d/modules/ruby.el")
 (load "~/.emacs.d/modules/web-mode.el")
 (load "~/.emacs.d/modules/yaml.el")
