@@ -11,11 +11,17 @@
 
 (setq line-spacing 1)
 
-(use-package simple-modeline
+(use-package modus-themes
   :ensure t
-  :hook (after-init . simple-modeline-mode))
+  :config
+  (load-theme 'modus-operandi t))
 
-(load-theme 'leuven t)
+(use-package smart-mode-line
+  :ensure t
+  :config
+  (setq sml/theme 'respectful
+        sml/no-confirm-load-theme t)
+  (sml/setup))
 
 (provide 'ui)
 ;;; ui.el ends here
