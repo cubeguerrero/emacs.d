@@ -13,7 +13,7 @@
 (load "~/.emacs.d/modules/ace-window.el")
 (load "~/.emacs.d/modules/projectile.el")
 
-(load "~/.emacs.d/modules/lsp.el")
+(load "~/.emacs.d/modules/lsp-eglot.el")
 
 (load "~/.emacs.d/modules/go.el")
 (load "~/.emacs.d/modules/javascript.el")

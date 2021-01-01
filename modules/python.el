@@ -2,13 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package lsp-python-ms
+(use-package pipenv
   :ensure t
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp))))
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq
+   pipenv-projectile-after-switch-function
+   #'pipenv-projectile-after-switch-extended))
 
 (setq python-shell-interpreter "/usr/local/bin/python3")
+
 (provide 'python)
 ;;; python.el ends here
