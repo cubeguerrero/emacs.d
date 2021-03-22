@@ -1,0 +1,8 @@
+.lsp-session-v*
+auto-save-list/
+elpa/
+eshell/
+ido.last
+init.el~
+projectile-bookmarks.eld
+transient/
