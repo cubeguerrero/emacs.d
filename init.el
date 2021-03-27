@@ -5,8 +5,7 @@
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/")
-             '("org" . "https://orgmode.org/elpa/")
-             '("elpa" . "https://elpa.gnu.org/packages/"))
+             '("org" . "https://orgmode.org/elpa/"))
 
 (package-initialize)
 (unless package-archive-contents
@@ -80,7 +79,7 @@
 (diminish 'auto-revert-mode)
 (diminish 'visual-line-mode)
 (diminish 'eldoc-mode)
-(diminish 'abbrev-mode
+(diminish 'abbrev-mode)
 
 (use-package doom-themes
   :config
