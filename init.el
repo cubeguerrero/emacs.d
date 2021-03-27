@@ -53,8 +53,6 @@
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Helvetica" :height 120 :weight 'regular)
 
-(load-theme 'leuven)
-
 ;;; Use-Package Setup
 (require 'package)
 
@@ -108,6 +106,10 @@
   (set-face-attribute 'mode-line nil :family "Fira Code Retina" :height 100)
   (set-face-attribute 'mode-line-inactive nil :family "Fira Code Retina" :height 100))
 
+(use-package doom-themes
+  :config
+  (load-theme 'doom-one-light t))
+
 ;;; Exec Path from Shell
 (when (memq window-system '(mac ns x))
   (use-package exec-path-from-shell
@@ -115,7 +117,9 @@
 
 ;;; Whichkey
 (use-package which-key
+  :diminish which-key-mode
   :config
+  (which-key-mode)
   (setq which-key-idle-delay 0.3))
 
 ;;; Projectile
@@ -149,7 +153,9 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
-  (setq lsp-headerline-breadcrumb-enable nil))
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
 
 ;;; Company mode
 (use-package company
