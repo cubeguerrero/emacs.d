@@ -201,7 +201,29 @@
 (use-package org
   :hook (org-mode . cubeg/org-mode-setup)
   :config
-  (setq org-ellipsis " ▾")
+  (setq org-ellipsis " ▾"
+        org-agenda-start-with-log-mode t
+        org-log-done 'time
+        org-log-into-drawer t)
+  
+  (if (getenv "ORG_FILES_DIR")
+      (setq org-directory (getenv "ORG_FILES_DIR"))
+    (setq org-directory "~/Code/Notes"))
+ 
+  (setq org-agenda-files
+        '("Tasks.org"))
+  
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+  
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")))
+
+  (setq org-tasks (format "%s/%s" org-directory "Tasks.org"))
+  (setq org-capture-templates
+    `(("t" "Tasks / Projects")
+      ("tt" "Task" entry (file+olp org-tasks "Inbox")
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
+  
   (cubeg/org-font-setup))
 
 (use-package org-bullets
