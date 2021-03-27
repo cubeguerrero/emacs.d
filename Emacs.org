@@ -1,6 +1,26 @@
+#+title: Emacs Configuration
+#+PROPERTY: header-args:emacs-lisp :tangle ./init-new.el :mkdirp yes
+
+* Welcome!
+
+This is my personal Emacs configuration that I built by following along [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs from Scratch]]. I copied a lot of the configuration, especially for Org mode.
+
+#+begin_src emacs-lisp
 (defvar cubeg/default-font-size 120)
 (defvar cubeg/default-variable-font-size 120)
+#+end_src
 
+#+begin_src 
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+#+end_src
+
+* Package System Setup
+
+For this setup, I'll be using [[https://github.com/jwiegley/use-package][use-package]] to install all the packages I need.
+
+#+begin_src emacs-lisp
 (require 'package)
 
 (add-to-list 'package-archives
@@ -17,7 +37,12 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+#+end_src
 
+* Better Defaults
+Well, I think they are...
+
+#+begin_src emacs-lisp
 (set-language-environment "UTF-8")
 
 (setq inhibit-startup-message t)
@@ -53,7 +78,10 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+#+end_src
 
+** Font Configuration
+#+begin_src emacs-lisp
 (set-face-attribute 'default nil :font "Fira Code Retina" :height cubeg/default-font-size)
 
 ;; Set the fixed pitch face
@@ -61,10 +89,18 @@
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Helvetica" :height cubeg/default-variable-font-size :weight 'regular)
+#+end_src
 
+** Exec path from shell
+I'm using Mac, this package ensures that the $PATH variable is loaded into Emacs
+#+begin_src emacs-lisp
 (use-package exec-path-from-shell
   :init (exec-path-from-shell-initialize))
+#+end_src
 
+* Keybindings
+Better default key bindings, which should make more sense.
+#+begin_src emacs-lisp
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
@@ -73,7 +109,12 @@
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
+#+end_src
 
+* UI Configuration
+** Diminish
+Don't litter my modeline! Also, this plays well with use-package!
+#+begin_src emacs-lisp
 (use-package diminish
   :ensure t)
 
@@ -81,11 +122,19 @@
 (diminish 'visual-line-mode)
 (diminish 'eldoc-mode)
 (diminish 'abbrev-mode
+#+end_src
 
+** Color Theme
+I'm using a light theme *gasp*, but I really like the doom-one-light theme from [[https://github.com/hlissner/emacs-doom-themes][doom-themes]].
+#+begin_src emacs-lisp
 (use-package doom-themes
   :config
   (load-theme 'doom-one-light t))
+#+end_src
 
+** Better modeline
+I'm using [[https://github.com/seagle0128/doom-modeline][doom-modeline]]. No particular reason except that I like how it looks.
+#+begin_src emacs-lisp
 (use-package all-the-icons)
 
 (use-package doom-modeline
@@ -93,13 +142,34 @@
   :config
   (set-face-attribute 'mode-line nil :family "Fira Code Retina" :height 100)
   (set-face-attribute 'mode-line-inactive nil :family "Fira Code Retina" :height 100))
+#+end_src
 
+** Whichkey
+#+begin_src emacs-lisp
 (use-package which-key
   :diminish which-key-mode
   :config
   (which-key-mode)
   (setq which-key-idle-delay 0.3))
+#+end_src
 
+** Ido
+#+begin_src 
+(setq ido-enable-flex-matching t
+     ido-everywhere t
+     ido-use-faces nil
+     ido-create-new-buffer 'always)
+(ido-mode 1)
+(ido-everywhere 1)
+
+(use-package flx-ido
+  :config
+  (flx-ido-mode t))
+#+end_src
+
+* Org Mode
+** Better Font Faces
+#+begin_src emacs-lisp
 (defun cubeg/org-font-setup ()
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.2)
@@ -120,7 +190,10 @@
   (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+#+end_src
 
+** Basic Config
+#+begin_src emacs-lisp
 (defun cubeg/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
@@ -153,13 +226,20 @@
            "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
   
   (cubeg/org-font-setup))
+#+end_src
 
+** Nicer Bullets
+The default bullets of Org mode looks ugly, better bullets!
+#+begin_src emacs-lisp
 (use-package org-bullets
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+#+end_src
 
+** Center Org Buffers
+#+begin_src emacs-lisp
 (defun cubeg/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
@@ -167,7 +247,10 @@
 
 (use-package visual-fill-column
   :hook (org-mode . cubeg/org-mode-visual-fill))
+#+end_src
 
+** Auto-tangle configuration files
+#+begin_src emacs-lisp
 (defun cubeg/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/.emacs.d/Emacs.org"))
@@ -176,7 +259,11 @@
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cubeg/org-babel-tangle-config)))
+#+end_src
 
+* Development
+** Projectile
+#+begin_src emacs-lisp
 (use-package projectile
   :diminish (projectile-mode)
   :init
@@ -195,11 +282,17 @@
 
 ;;; Ag
 (use-package ag)
+#+end_src
 
+** Magit
+#+begin_src emacs-lisp
 (use-package magit
   :bind (("C-x g" . magit-status)
          ("C-x C-g" . magit-status)))
+#+end_src
 
+** LSP
+#+begin_src emacs-lisp
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
@@ -208,17 +301,30 @@
   (setq lsp-headerline-breadcrumb-enable nil)
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
+#+end_src
 
+*** Company mode
+#+begin_src emacs-lisp
 (use-package company
   :diminish (company-mode))
+#+end_src
 
+** Go
+#+begin_src emacs-lisp
 (use-package go-mode
   :mode "\\.go\\'"
   :hook (go-mode . lsp-deferred))
+#+end_src
 
+** Ruby
+#+begin_src emacs-lisp
 (use-package enh-ruby-mode
   :mode "\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
   :hook (enh-ruby-mode . lsp-deferred))
+#+end_src
 
+** Custom File
+#+begin_src emacs-lisp
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+#+end_src
