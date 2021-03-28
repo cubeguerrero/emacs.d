@@ -6,14 +6,9 @@
 This is my personal Emacs configuration that I built by following along [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs from Scratch]]. I copied a lot of the configuration, especially for Org mode.
 
 #+begin_src emacs-lisp
-(defvar cubeg/default-font-size 120)
-(defvar cubeg/default-variable-font-size 120)
-#+end_src
-
-#+begin_src 
-(require 'org-tempo)
-
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(defvar cubeg/default-font-size 140)
+(defvar cubeg/default-variable-font-size 140)
+(defvar cubeg/default-modeline-font-size 120)
 #+end_src
 
 * Package System Setup
@@ -139,8 +134,8 @@ I'm using [[https://github.com/seagle0128/doom-modeline][doom-modeline]]. No par
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (set-face-attribute 'mode-line nil :family "Fira Code Retina" :height 100)
-  (set-face-attribute 'mode-line-inactive nil :family "Fira Code Retina" :height 100))
+  (set-face-attribute 'mode-line nil :family "Fira Code Retina" :height cubeg/default-modeline-font-size)
+  (set-face-attribute 'mode-line-inactive nil :family "Fira Code Retina" :height cubeg/default-modeline-font-size))
 #+end_src
 
 ** Whichkey
@@ -211,7 +206,7 @@ I'm using [[https://github.com/seagle0128/doom-modeline][doom-modeline]]. No par
     (setq org-directory "~/Code/Notes"))
  
   (setq org-agenda-files
-        '("Tasks.org"))
+        '("~/Google Drive/My Drive/Notes/Tasks.org")))
   
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   

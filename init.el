@@ -1,5 +1,6 @@
-(defvar cubeg/default-font-size 120)
-(defvar cubeg/default-variable-font-size 120)
+(defvar cubeg/default-font-size 140)
+(defvar cubeg/default-variable-font-size 140)
+(defvar cubeg/default-modeline-font-size 120)
 
 (require 'package)
 
@@ -90,8 +91,8 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (set-face-attribute 'mode-line nil :family "Fira Code Retina" :height 100)
-  (set-face-attribute 'mode-line-inactive nil :family "Fira Code Retina" :height 100))
+  (set-face-attribute 'mode-line nil :family "Fira Code Retina" :height cubeg/default-modeline-font-size)
+  (set-face-attribute 'mode-line-inactive nil :family "Fira Code Retina" :height cubeg/default-modeline-font-size))
 
 (use-package which-key
   :diminish which-key-mode
@@ -138,7 +139,7 @@
     (setq org-directory "~/Code/Notes"))
  
   (setq org-agenda-files
-        '("Tasks.org"))
+        '("~/Google Drive/My Drive/Notes/Tasks.org")))
   
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   
