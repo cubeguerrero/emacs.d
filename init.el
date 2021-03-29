@@ -1,6 +1,6 @@
-(defvar cubeg/default-font-size 140)
-(defvar cubeg/default-variable-font-size 140)
-(defvar cubeg/default-modeline-font-size 120)
+(defvar cubeg/default-font-size 130)
+(defvar cubeg/default-variable-font-size 130)
+(defvar cubeg/default-modeline-font-size 110)
 
 (require 'package)
 
@@ -133,25 +133,30 @@
         org-agenda-start-with-log-mode t
         org-log-done 'time
         org-log-into-drawer t)
-  
-  (if (getenv "ORG_FILES_DIR")
-      (setq org-directory (getenv "ORG_FILES_DIR"))
-    (setq org-directory "~/Code/Notes"))
- 
-  (setq org-agenda-files
-        '("~/Google Drive/My Drive/Notes/Tasks.org")))
-  
-  (advice-add 'org-refile :after 'org-save-all-org-buffers)
-  
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")))
 
-  (setq org-tasks (format "%s/%s" org-directory "Tasks.org"))
+  (setq org-agenda-files
+        '("~/Google Drive/My Drive/Notes/Tasks.org"))
+
+  (setq org-todo-keywords
+    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")))
+
   (setq org-capture-templates
     `(("t" "Tasks / Projects")
-      ("tt" "Task" entry (file+olp org-tasks "Inbox")
-           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
-  
+      ("tt" "Task" entry (file+olp "~/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org" "Inbox")
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+      ("j" "Journal Entries")
+      ("jj" "Journal" entry
+           (file+olp+datetree "~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+           :clock-in :clock-resume
+           :empty-lines 1)
+      ("jm" "Meeting" entry
+           (file+olp+datetree "~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+           :clock-in :clock-resume
+           :empty-lines 1)))
+
   (cubeg/org-font-setup))
 
 (use-package org-bullets
@@ -209,6 +214,8 @@
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
 
+(use-package lsp-ui)
+
 (use-package company
   :diminish (company-mode))
 
@@ -219,6 +226,8 @@
 (use-package enh-ruby-mode
   :mode "\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
   :hook (enh-ruby-mode . lsp-deferred))
+
+(use-package dockerfile-mode)
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
