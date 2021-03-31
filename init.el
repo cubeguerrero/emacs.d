@@ -1,6 +1,6 @@
-(defvar cubeg/default-font-size 130)
-(defvar cubeg/default-variable-font-size 130)
-(defvar cubeg/default-modeline-font-size 110)
+(defvar cubeg/default-font-size 120)
+(defvar cubeg/default-variable-font-size 120)
+(defvar cubeg/default-modeline-font-size 100)
 
 (require 'package)
 
@@ -54,10 +54,10 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-(set-face-attribute 'default nil :font "Fira Code Retina" :height cubeg/default-font-size)
+(set-face-attribute 'default nil :font "Menlo" :height cubeg/default-font-size)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height cubeg/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "Menlo" :height cubeg/default-font-size)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Helvetica" :height cubeg/default-variable-font-size :weight 'regular)
@@ -82,17 +82,17 @@
 (diminish 'eldoc-mode)
 (diminish 'abbrev-mode)
 
-(use-package doom-themes
+(use-package modus-themes
   :config
-  (load-theme 'doom-one-light t))
+  (load-theme 'modus-operandi t))
 
 (use-package all-the-icons)
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (set-face-attribute 'mode-line nil :family "Fira Code Retina" :height cubeg/default-modeline-font-size)
-  (set-face-attribute 'mode-line-inactive nil :family "Fira Code Retina" :height cubeg/default-modeline-font-size))
+  (set-face-attribute 'mode-line nil :family "DejaVu Sans Mono" :height cubeg/default-modeline-font-size)
+  (set-face-attribute 'mode-line-inactive nil :family "DejaVu Sans Mono" :height cubeg/default-modeline-font-size))
 
 (use-package which-key
   :diminish which-key-mode
@@ -227,7 +227,15 @@
   :mode "\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
   :hook (enh-ruby-mode . lsp-deferred))
 
+(use-package pipenv
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq pipenv-with-flycheck nil)
+  (setq pipenv-projectile-after-switch-function #'pipenv-projectile-after-switch-extended))
+
 (use-package dockerfile-mode)
+
+(use-package protobuf-mode)
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)

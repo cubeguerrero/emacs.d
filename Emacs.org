@@ -6,9 +6,9 @@
 This is my personal Emacs configuration that I built by following along [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs from Scratch]]. I copied a lot of the configuration, especially for Org mode.
 
 #+begin_src emacs-lisp
-(defvar cubeg/default-font-size 130)
-(defvar cubeg/default-variable-font-size 130)
-(defvar cubeg/default-modeline-font-size 110)
+(defvar cubeg/default-font-size 120)
+(defvar cubeg/default-variable-font-size 120)
+(defvar cubeg/default-modeline-font-size 100)
 #+end_src
 
 * Package System Setup
@@ -76,10 +76,10 @@ Well, I think they are...
 
 ** Font Configuration
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :font "Fira Code Retina" :height cubeg/default-font-size)
+(set-face-attribute 'default nil :font "Menlo" :height cubeg/default-font-size)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height cubeg/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "Menlo" :height cubeg/default-font-size)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Helvetica" :height cubeg/default-variable-font-size :weight 'regular)
@@ -121,9 +121,9 @@ Don't litter my modeline! Also, this plays well with use-package!
 ** Color Theme
 I'm using a light theme *gasp*, but I really like the doom-one-light theme from [[https://github.com/hlissner/emacs-doom-themes][doom-themes]].
 #+begin_src emacs-lisp
-(use-package doom-themes
+(use-package modus-themes
   :config
-  (load-theme 'doom-one-light t))
+  (load-theme 'modus-operandi t))
 #+end_src
 
 ** Better modeline
@@ -134,8 +134,8 @@ I'm using [[https://github.com/seagle0128/doom-modeline][doom-modeline]]. No par
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (set-face-attribute 'mode-line nil :family "Fira Code Retina" :height cubeg/default-modeline-font-size)
-  (set-face-attribute 'mode-line-inactive nil :family "Fira Code Retina" :height cubeg/default-modeline-font-size))
+  (set-face-attribute 'mode-line nil :family "DejaVu Sans Mono" :height cubeg/default-modeline-font-size)
+  (set-face-attribute 'mode-line-inactive nil :family "DejaVu Sans Mono" :height cubeg/default-modeline-font-size))
 #+end_src
 
 ** Whichkey
@@ -324,10 +324,25 @@ The default bullets of Org mode looks ugly, better bullets!
   :hook (enh-ruby-mode . lsp-deferred))
 #+end_src
 
+** Python
+#+begin_src emacs-lisp
+(use-package pipenv
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq pipenv-with-flycheck nil)
+  (setq pipenv-projectile-after-switch-function #'pipenv-projectile-after-switch-extended))
+#+end_src
+
 ** Docker
 #+begin_src emacs-lisp
 (use-package dockerfile-mode)
 #+end_src
+
+** Protobuf
+#+begin_src emacs-lisp
+(use-package protobuf-mode)
+#+end_src
+
 * Custom File
 #+begin_src emacs-lisp
 (setq custom-file "~/.emacs.d/custom.el")
