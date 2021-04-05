@@ -76,10 +76,10 @@ Well, I think they are...
 
 ** Font Configuration
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :font "Menlo" :height cubeg/default-font-size)
+(set-face-attribute 'default nil :font "JetBrains Mono" :height cubeg/default-font-size)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Menlo" :height cubeg/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height cubeg/default-font-size)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Helvetica" :height cubeg/default-variable-font-size :weight 'regular)
@@ -134,8 +134,8 @@ I'm using [[https://github.com/seagle0128/doom-modeline][doom-modeline]]. No par
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (set-face-attribute 'mode-line nil :family "DejaVu Sans Mono" :height cubeg/default-modeline-font-size)
-  (set-face-attribute 'mode-line-inactive nil :family "DejaVu Sans Mono" :height cubeg/default-modeline-font-size))
+  (set-face-attribute 'mode-line nil :family "Monaco" :height cubeg/default-modeline-font-size)
+  (set-face-attribute 'mode-line-inactive nil :family "JetBrains Mono" :height cubeg/default-modeline-font-size))
 #+end_src
 
 ** Whichkey
@@ -312,16 +312,16 @@ The default bullets of Org mode looks ugly, better bullets!
 
 ** Go
 #+begin_src emacs-lisp
-(use-package go-mode
-  :mode "\\.go\\'"
-  :hook (go-mode . lsp-deferred))
+  (use-package go-mode
+    :mode "\\.go\\'"
+    :hook (go-mode . lsp-deferred))
 #+end_src
 
 ** Ruby
 #+begin_src emacs-lisp
-(use-package enh-ruby-mode
-  :mode "\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-  :hook (enh-ruby-mode . lsp-deferred))
+  (use-package enh-ruby-mode
+    :mode "\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+    :hook (enh-ruby-mode . lsp-deferred))
 #+end_src
 
 ** Python
@@ -335,9 +335,14 @@ The default bullets of Org mode looks ugly, better bullets!
 
 ** Docker
 #+begin_src emacs-lisp
-(use-package dockerfile-mode)
+  (use-package dockerfile-mode)
 #+end_src
 
+Working with Docker and Kubernetes means a *LOOOOT* of yaml files...
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+      :mode "\\.yml\\'")
+#+end_src
 ** Protobuf
 #+begin_src emacs-lisp
 (use-package protobuf-mode)
