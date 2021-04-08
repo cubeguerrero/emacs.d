@@ -54,10 +54,10 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-(set-face-attribute 'default nil :font "JetBrains Mono" :height cubeg/default-font-size)
+(set-face-attribute 'default nil :font "IBM Plex Mono" :height cubeg/default-font-size)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height cubeg/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "IBM Plex Mono" :height cubeg/default-font-size)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Helvetica" :height cubeg/default-variable-font-size :weight 'regular)
@@ -91,8 +91,8 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (set-face-attribute 'mode-line nil :family "Monaco" :height cubeg/default-modeline-font-size)
-  (set-face-attribute 'mode-line-inactive nil :family "JetBrains Mono" :height cubeg/default-modeline-font-size))
+  (set-face-attribute 'mode-line nil :family "IBM Plex Mono" :height cubeg/default-modeline-font-size)
+  (set-face-attribute 'mode-line-inactive nil :family "IBM Plex Mono" :height cubeg/default-modeline-font-size))
 
 (use-package which-key
   :diminish which-key-mode
