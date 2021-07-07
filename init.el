@@ -1,6 +1,6 @@
-(defvar cubeg/default-font-size 120)
-(defvar cubeg/default-variable-font-size 120)
-(defvar cubeg/default-modeline-font-size 100)
+(defvar cubeg/default-font-size 140)
+(defvar cubeg/default-variable-font-size 140)
+(defvar cubeg/default-modeline-font-size 120)
 
 (require 'package)
 
@@ -46,6 +46,8 @@
       mouse-yank-at-point t
       require-final-newline t
       ediff-window-setup-function 'ediff-setup-windows-plain
+      gc-cons-threshold 100000000
+      read-process-output-max (* 1024 1024)
       save-place-file (concat user-emacs-directory "places"))
 
 ;; store all backup and autosave files in the tmp dir
@@ -54,10 +56,10 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-(set-face-attribute 'default nil :font "Menlo" :height cubeg/default-font-size)
+(set-face-attribute 'default nil :font "JetBrains Mono" :height cubeg/default-font-size)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Menlo" :height cubeg/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height cubeg/default-font-size)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Helvetica" :height cubeg/default-variable-font-size :weight 'regular)
@@ -91,8 +93,8 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (set-face-attribute 'mode-line nil :family "Menlo" :height cubeg/default-modeline-font-size)
-  (set-face-attribute 'mode-line-inactive nil :family "Menlo" :height cubeg/default-modeline-font-size))
+  (set-face-attribute 'mode-line nil :family "JetBrains Mono" :height cubeg/default-modeline-font-size)
+  (set-face-attribute 'mode-line-inactive nil :family "JetBrains Mono" :height cubeg/default-modeline-font-size))
 
 (use-package which-key
   :diminish which-key-mode
@@ -210,7 +212,8 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
-  (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-idle-delay 0.500
+        lsp-headerline-breadcrumb-enable nil)
   (with-eval-after-load 'lsp-mode
     (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
 

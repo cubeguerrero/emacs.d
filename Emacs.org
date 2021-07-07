@@ -6,9 +6,9 @@
 This is my personal Emacs configuration that I built by following along [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs from Scratch]]. I copied a lot of the configuration, especially for Org mode.
 
 #+begin_src emacs-lisp
-(defvar cubeg/default-font-size 120)
-(defvar cubeg/default-variable-font-size 120)
-(defvar cubeg/default-modeline-font-size 100)
+(defvar cubeg/default-font-size 140)
+(defvar cubeg/default-variable-font-size 140)
+(defvar cubeg/default-modeline-font-size 120)
 #+end_src
 
 * Package System Setup
@@ -37,49 +37,51 @@ For this setup, I'll be using [[https://github.com/jwiegley/use-package][use-pac
 Well, I think they are...
 
 #+begin_src emacs-lisp
-(set-language-environment "UTF-8")
+  (set-language-environment "UTF-8")
 
-(setq inhibit-startup-message t)
-(fset 'yes-or-no-p 'y-or-n-p)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(menu-bar-mode -1)
-(delete-selection-mode 1)
-(global-auto-revert-mode 1)
-(global-font-lock-mode t)
-(show-paren-mode 1)
-(transient-mark-mode 1)
-(mac-auto-operator-composition-mode 1) ;; only available on railwaycat mac version
+  (setq inhibit-startup-message t)
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+  (tooltip-mode -1)
+  (menu-bar-mode -1)
+  (delete-selection-mode 1)
+  (global-auto-revert-mode 1)
+  (global-font-lock-mode t)
+  (show-paren-mode 1)
+  (transient-mark-mode 1)
+  (mac-auto-operator-composition-mode 1) ;; only available on railwaycat mac version
 
-(setq-default show-paren-delay 0
-              indent-tabs-mode nil
-              save-place t
-              dired-listing-switches "-alh"
-              major-mode #'text-mode)
+  (setq-default show-paren-delay 0
+                indent-tabs-mode nil
+                save-place t
+                dired-listing-switches "-alh"
+                major-mode #'text-mode)
 
-(setq ring-bell-function 'ignore
-      load-prefer-newer t
-      save-interprogram-paiste-before-kill t
-      apropos-do-all t
-      mouse-yank-at-point t
-      require-final-newline t
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      save-place-file (concat user-emacs-directory "places"))
+  (setq ring-bell-function 'ignore
+        load-prefer-newer t
+        save-interprogram-paiste-before-kill t
+        apropos-do-all t
+        mouse-yank-at-point t
+        require-final-newline t
+        ediff-window-setup-function 'ediff-setup-windows-plain
+        gc-cons-threshold 100000000
+        read-process-output-max (* 1024 1024)
+        save-place-file (concat user-emacs-directory "places"))
 
-;; store all backup and autosave files in the tmp dir
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+  ;; store all backup and autosave files in the tmp dir
+  (setq backup-directory-alist
+        `((".*" . ,temporary-file-directory)))
+  (setq auto-save-file-name-transforms
+        `((".*" ,temporary-file-directory t)))
 #+end_src
 
 ** Font Configuration
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :font "Menlo" :height cubeg/default-font-size)
+(set-face-attribute 'default nil :font "JetBrains Mono" :height cubeg/default-font-size)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Menlo" :height cubeg/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height cubeg/default-font-size)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Helvetica" :height cubeg/default-variable-font-size :weight 'regular)
@@ -134,8 +136,8 @@ I'm using [[https://github.com/seagle0128/doom-modeline][doom-modeline]]. No par
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (set-face-attribute 'mode-line nil :family "Menlo" :height cubeg/default-modeline-font-size)
-  (set-face-attribute 'mode-line-inactive nil :family "Menlo" :height cubeg/default-modeline-font-size))
+  (set-face-attribute 'mode-line nil :family "JetBrains Mono" :height cubeg/default-modeline-font-size)
+  (set-face-attribute 'mode-line-inactive nil :family "JetBrains Mono" :height cubeg/default-modeline-font-size))
 #+end_src
 
 ** Whichkey
@@ -292,16 +294,17 @@ The default bullets of Org mode looks ugly, better bullets!
 
 ** LSP
 #+begin_src emacs-lisp
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :config
-  (setq lsp-headerline-breadcrumb-enable nil)
-  (with-eval-after-load 'lsp-mode
-    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :config
+    (setq lsp-idle-delay 0.500
+          lsp-headerline-breadcrumb-enable nil)
+    (with-eval-after-load 'lsp-mode
+      (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
 
-(use-package lsp-ui)
+  (use-package lsp-ui)
 #+end_src
 
 *** Company mode
@@ -343,6 +346,7 @@ Working with Docker and Kubernetes means a *LOOOOT* of yaml files...
   (use-package yaml-mode
       :mode "\\.yml\\'")
 #+end_src
+
 ** Protobuf
 #+begin_src emacs-lisp
 (use-package protobuf-mode)
