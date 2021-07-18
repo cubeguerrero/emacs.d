@@ -1,6 +1,6 @@
-(defvar cubeg/default-font-size 140)
-(defvar cubeg/default-variable-font-size 140)
-(defvar cubeg/default-modeline-font-size 120)
+(defvar cubeg/default-font-size 130)
+(defvar cubeg/default-variable-font-size 130)
+(defvar cubeg/default-modeline-font-size 110)
 
 (require 'package)
 
@@ -31,7 +31,6 @@
 (global-font-lock-mode t)
 (show-paren-mode 1)
 (transient-mark-mode 1)
-(mac-auto-operator-composition-mode 1) ;; only available on railwaycat mac version
 
 (setq-default show-paren-delay 0
               indent-tabs-mode nil
@@ -56,13 +55,13 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-(set-face-attribute 'default nil :font "JetBrains Mono" :height cubeg/default-font-size)
+(set-face-attribute 'default nil :font "Menlo" :height cubeg/default-font-size)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height cubeg/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "Menlo" :height cubeg/default-font-size)
 
 ;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Helvetica" :height cubeg/default-variable-font-size :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "Times New Roman" :height cubeg/default-variable-font-size :weight 'regular)
 
 (use-package exec-path-from-shell
   :init (exec-path-from-shell-initialize))
@@ -93,14 +92,30 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (set-face-attribute 'mode-line nil :family "JetBrains Mono" :height cubeg/default-modeline-font-size)
-  (set-face-attribute 'mode-line-inactive nil :family "JetBrains Mono" :height cubeg/default-modeline-font-size))
+  (set-face-attribute 'mode-line nil :family "Menlo" :height cubeg/default-modeline-font-size)
+  (set-face-attribute 'mode-line-inactive nil :family "Menlo" :height cubeg/default-modeline-font-size))
 
 (use-package which-key
   :diminish which-key-mode
   :config
   (which-key-mode)
   (setq which-key-idle-delay 0.3))
+
+(setq ido-enable-flex-matching t
+     ido-everywhere t
+     ido-use-faces nil
+     ido-create-new-buffer 'always)
+(ido-mode 1)
+(ido-everywhere 1)
+
+(use-package flx-ido
+  :config
+  (flx-ido-mode t))
+
+(use-package ido-vertical-mode
+  :config
+  (ido-vertical-mode 1)
+  (setq ido-vertical-define-keys 'C-n-and-C-p-only))
 
 (defun cubeg/org-font-setup ()
   ;; Set faces for heading levels
