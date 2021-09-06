@@ -55,6 +55,8 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
 (set-face-attribute 'default nil :font "Menlo" :height cubeg/default-font-size)
 
 ;; Set the fixed pitch face
