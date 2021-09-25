@@ -22,7 +22,6 @@
 
 (setq inhibit-startup-message t)
 (fset 'yes-or-no-p 'y-or-n-p)
-(scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
 (menu-bar-mode -1)
@@ -85,9 +84,7 @@
 (diminish 'eldoc-mode)
 (diminish 'abbrev-mode)
 
-(use-package modus-themes
-  :config
-  (load-theme 'modus-operandi t))
+
 
 (use-package all-the-icons)
 
@@ -259,6 +256,9 @@
     :mode "\\.yml\\'")
 
 (use-package protobuf-mode)
+
+(use-package haskell-mode
+    :mode "\\.hs\\'")
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)

@@ -1,3 +1,4 @@
+
 #+title: Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 
@@ -41,7 +42,6 @@ Well, I think they are...
 
   (setq inhibit-startup-message t)
   (fset 'yes-or-no-p 'y-or-n-p)
-  (scroll-bar-mode -1)
   (tool-bar-mode -1)
   (tooltip-mode -1)
   (menu-bar-mode -1)
@@ -124,9 +124,6 @@ Don't litter my modeline! Also, this plays well with use-package!
 ** Color Theme
 I'm using a light theme *gasp*, but I really like the doom-one-light theme from [[https://github.com/hlissner/emacs-doom-themes][doom-themes]].
 #+begin_src emacs-lisp
-(use-package modus-themes
-  :config
-  (load-theme 'modus-operandi t))
 #+end_src
 
 ** Better modeline
@@ -356,6 +353,12 @@ Working with Docker and Kubernetes means a *LOOOOT* of yaml files...
 ** Protobuf
 #+begin_src emacs-lisp
 (use-package protobuf-mode)
+#+end_src
+
+** Haskell
+#+begin_src emacs-lisp
+  (use-package haskell-mode
+      :mode "\\.hs\\'")
 #+end_src
 
 * Custom File
